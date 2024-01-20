@@ -3,4 +3,6 @@ from django.shortcuts import render
 # Create your views here.
 
 def hello(request):
-    return render(request,'home.html')
+    
+    context = {"name": ['siavash', 'mohamad','ali']}
+    return render(request,'core/home.html', context)
