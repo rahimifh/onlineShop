@@ -5,32 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Shope</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
 </head>
 <body>
-    <div class="header" > 
-        <h1>Home</h1>
-        <h1>About Us</h1>
-        <h1>Alboum</h1>
-        <h1>Plans</h1>
-    </div>
+    <div class="banner">
+        <div class="card_box">
+            {% for item in products %}
+                <div class="card">
+                    <div class="image_box">
+                        <img class="card_image" src="{{item.image.url}}" alt="{{item.image}}">
+                    </div>
+                    <div class="info_box">
+                        <h4>{{item.name}}</h4>
+                        <p>{{item.description}}</p>
+                        <a href="{}"><button>جزییات</button></a>
+                    </div>
 
-    <div class="middle_box" >
-        <div class="left_side">
 
+                </div>
+            {% endfor %}
         </div>
-        <div class="right_middle_box" >
-        <h1 class="first_h1">hello world!!</h1>
-        <h1 class="first_h1">{{name}}</h1>
-        <h2>test</h2>
-        <p id="my_p">this is a test</p>
-        </div>
-    </div>
 
-    <div class="left_middle_box" >
-        <h1 id="my_text">  </h1>
     </div>
-
 </body>
 <script src="{% static 'index.js' %}"></script>
 </html>

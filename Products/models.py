@@ -7,8 +7,9 @@ class product(models.Model):
     code = models.CharField(max_length= 10)
     price = models.IntegerField()
     description = models.TextField()
+    image = models.ImageField()
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} _ {self.id}"
 
     
