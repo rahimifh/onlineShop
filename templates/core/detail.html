@@ -1,0 +1,26 @@
+{% extends  'core/base.html' %}
+{% load static %}
+{% block body %}
+<div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+          <h2>{{ product.name}}</h2>
+          <figure class="figure">
+              <img src="{{ product.image.url }}" class="figure-img img-fluid rounded" alt="...">
+              <figcaption class="figure-caption">A caption for the above image.</figcaption>
+          </figure>
+          <button class="btn btn-outline-light" type="button">price: {{ product.price}}</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>{{ product.code }}</h2>
+          <p>{{ product.description }}</p>
+          <button class="btn btn-outline-secondary" type="button">Bye</button>
+        </div>
+      </div>
+    </div>
+
+
+    
+{% endblock %}

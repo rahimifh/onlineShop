@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    width: 100vw;
+    height: 100px;
+    background-color: aqua;
+}
+.body{
+    width: 100vw;
+    height: auto;
+    padding: 200px;
+}
+.test{
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+    margin: 20px;
+    border: 20px double black;
+    padding: 20px;
+}

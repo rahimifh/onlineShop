@@ -1,0 +1,31 @@
+{% extends  'core/base.html' %}
+{% load static %}
+{% block body %}
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="banner">
+        <div class="card_box">
+            {% for item in products %}
+                <div class="card">
+                    <div class="image_box">
+                        <img class="card_image" src="{{item.image.url}}" alt="{{item.image}}">
+                    </div>
+                    <div class="info_box">
+                        <h4>{{item.name}}</h4>
+                        <p>{{item.description}}</p>
+                        <a href="{% url 'products:detail' item.id %}"><button>جزییات</button></a>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

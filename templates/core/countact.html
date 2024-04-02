@@ -1,0 +1,31 @@
+{% extends  'core/base.html' %}
+{% load static %}
+{% block body %}
+
+    
+<form method="post">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input name="name" type="text" class="form-control" id="name" >
+    <div id="name" class="form-text"></div>
+  </div>
+
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email</label>
+  <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Your Message</label>
+  <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="type your message..."></textarea>
+</div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+    <br>
+{% if messages %}
+    {% for message in messages %}
+        <button type="button" class="btn btn-outline-success">{{ message }}</button>
+    {% endfor %}
+    
+{% endif %}
+{% endblock %}
