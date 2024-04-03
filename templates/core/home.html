@@ -1,13 +1,6 @@
-<!DOCTYPE html>
- {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shope</title>
-    <link rel="stylesheet" href="{% static 'css/core.css' %}">
-</head>
-<body>
+
+{% block body %}
+    
     <div class="banner">
         <div class="card_box">
             {% for item in products %}
@@ -18,7 +11,7 @@
                     <div class="info_box">
                         <h4>{{item.name}}</h4>
                         <p>{{item.description}}</p>
-                        <a href="{% url 'product:dital' item.id % }"><button>جزییات</button></a>
+                        <a href="{% url 'product:dital' item.id %}"> <button>جزییات</button></a>
                     </div>
 
 
@@ -27,6 +20,5 @@
         </div>
 
     </div>
-</body>
-<script src="{% static 'index.js' %}"></script>
-</html>
+
+{% endblock %}
