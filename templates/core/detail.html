@@ -1,24 +1,26 @@
-<!DOCTYPE html>
- {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shope</title>
-    <link rel="stylesheet" href="{% static 'css/core.css' %}">
-</head>
-<body>
-    <div class="banner">
-        <div class="card_box">
-            <div class="detail_card">
-                <p>{{product.name}}</p>
-                <p>{{product.id}}</p>
-            
-            
+{% extends  'base/base.html' %}
+{% load static %}
+{% block body %}
+<div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+          <h2>{{ products.name}}</h2>
+          <figure class="figure">
+              <img src="{{ products.image.url }}" class="figure-img img-fluid rounded" alt="...">
+              <figcaption class="figure-caption">A caption for the above image.</figcaption>
+          </figure>
+          <button class="btn btn-outline-light" type="button">price: {{ products.price}}</button>
         </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>{{ products.code }}</h2>
+          <p>{{ products.description }}</p>
+          <button class="btn btn-outline-secondary" type="button">Bye</button>
         </div>
-
+      </div>
     </div>
-</body>
-<script src="{% static 'index.js' %}"></script>
-</html>
+
+
+    
+{% endblock %}

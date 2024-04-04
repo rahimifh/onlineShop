@@ -5,8 +5,7 @@ from Products.models import Product
 
 def home(request):
     products = Product.objects.all()
-    context = {"products":products}
-    return render(request,'core/home.html', context)
+    return render(request,'core/home.html', {'products':products})
 
 def aboutUs(request):
     return render(request, 'core/aboutus.html')

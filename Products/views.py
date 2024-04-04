@@ -5,5 +5,4 @@ from .models import Product
 
 def pro_detail(request, id):
     pro = Product.objects.get(id = id)
-    context = {"product":pro}
-    return render(request, "core/detail.html", context)
+    return render(request, "core/detail.html",{'products':pro})

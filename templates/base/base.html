@@ -16,6 +16,39 @@
 {% endblock %}
 
 
+<footer class="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
+  <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+    <div class="row">
+        <h2>You can tell us:</h2>
+      <div class="col-lg-3 mb-3">
+          
+
+        <ul class="list-unstyled small">
+          <li class="mb-2">Designed and built with all the love in the world by the <a >Online Shop team</a> with the help of <a href="{% url 'homepage:aboutus' %}">our contributors</a>.</li>
+            <li>Address: {{ contact.address }}</li>
+            <li>Phone: {{ contact.phone_number }}</li>
+            <li>Email: {{ contact.email }}</li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+        <h5><a href="{{ contact.telegram }}">Telegram</a></h5>
+
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5><a href="{{ contact.instagram }}">Instagram</a></h5>
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5><a href="{{ contact.whatsapp }}">WhatsApp</a></h5>
+
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5><a href="{{ contact.eitaa }}">Eitaa</a></h5>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 <script src="{% static 'index.js' %}"></script>
 </html>
