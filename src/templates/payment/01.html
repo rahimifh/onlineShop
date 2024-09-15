@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        window.affiliData = window.affiliData || [];function affili(){affiliData.push(arguments);}
+        affili('create');
+    </script>
+</head>
+
+<body class="bg-gray-200">
+    
+    <h1>{{message}}</h1><br>
+    <a href="{% url "dashboard:account_offer_templates" %}">بازگشت به سایت </a>
+    {{response}}<br>
+    {{payCode}}<br>
+
+    {% if new_order %}
+        <script async src="https://analytics.affili.ir/scripts/affili-v2.js"></script>
+        <script>
+        window.affiliData = window.affiliData || [];
+        function affili() {
+            affiliData.push(arguments);
+        }
+        affili('create');
+        affili('conversion', '{{ new_order.authority }}', '{{ new_order.final_price }}', {
+            coupon: '{{ new_order.discount }}',
+            products: [
+            {
+                name: '{{ new_order.plan.title }}',
+                unit_price: '{{ new_order.plan.final_price }}',
+                quantity: '1',
+                total_price: '{{ new_order.final_price }}',
+            },
+            ],
+        });
+        </script>
+    {% endif %}
+    
+</body>
+
+</html>

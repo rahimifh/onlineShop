@@ -1,0 +1,98 @@
+<!-- account_orders.html -->
+{% extends 'dashboard/_DashMain.html' %}
+{% block title %}
+    <title>
+        کمپین های ایجاد شده _ داشبورد
+    </title>
+{% endblock %}
+{% load static %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/cal/persian-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account_offers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account_overview.css' %}?=1">
+
+
+{% endblock %}
+{% block content %}
+    <div class="flex flex-col justify-center items-center">
+        <h1 class=" text-3xl linear-background p-2 my-8 rounded-md text-gray-900 font-bold text-center">کمپین‌های
+            شما</h1>
+
+        {% if offers %}
+            <a href="{% url 'dashboard:account-offers-export' %}">
+                <button class="inline-block w-full px-6 py-3 mb-4 text-xs font-bold text-center text-white uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-md cursor-pointer dark:border dark:border-solid dark:border-white leading-pro hover:shadow-xs hover:-translate-y-px active:opacity-85 tracking-tight-rem bg-150 bg-x-25 bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850">
+                    دریافت فایل اِکسِل
+                    <span class="iconify" data-icon="vscode-icons:file-type-excel" data-width="23"
+                          data-height="23"></span>
+                </button>
+            </a>
+
+            <div id="table-container" class="table_container">
+                <table id="my-table" class="rwd-table">
+                    <tbody>
+                    <tr>
+                        <th class="font-bolder text-4">شناسه</th>
+                        <th class="font-bolder text-4">عنوان</th>
+                        <th class="font-bolder text-4">تاریخ شروع</th>
+                        <th class="font-bolder text-4">تاریخ پایان</th>
+                        <th class="font-bolder text-4">شرکت‌کنندگان</th>
+                        <th class="font-bolder text-4">تحلیل کمپین</th>
+                        <th class="font-bolder text-4"> آدرس کمپین</th>
+                        <th class="font-bolder text-4">ویرایش کمپین</th>
+                    </tr>
+                    {% for offer in offers %}
+                        <tr>
+                            <td data-th="شناسه">
+                                {{ offer.id }}
+                            </td>
+                            <td data-th="عنوان">{{ offer.title }}</td>
+                            <td data-th="تاریخ شروع">{% if  offer.JaliliStartDate %}{{ offer.JaliliStartDate }}{% else %}_{% endif %}</td>
+                            <td data-th="تاریخ پایان">{% if  offer.JaliliEndDate %}{{ offer.JaliliEndDate }}{% else %}_{% endif %}</td>
+                            <td data-th="شرکت‌کنندگان"><a class="flex justify-center items-center"
+                                                          href="{% url 'dashboard:account_customers' offer.id %}">
+                                <span class="iconify text-[#7f60e4] hover:text-[#462B9DFF]" data-icon="gis:globe-users"
+                                      data-width="26" data-height="26"></span>
+                            </a></td>
+                            <td data-th="تحلیل کمپین"><a class="flex justify-center items-center"
+                                                         href="{% url 'dashboard:offer_analysis' %}?offer={{ offer.id }}">
+                                <span class="iconify  text-[#7f60e4] hover:text-[#462B9DFF]"
+                                      data-icon="icon-park-twotone:analysis" data-width="26" data-height="26"></span>
+                            </a></td>
+                            <td data-th="آدرس کمپین">
+                                {% if offer.landingPage != None %}
+                                    <a class="hover:text-[#7F60E4]" href="{{ offer.landingPage }}"
+                                    >{{ offer.landingPage }}</a>
+                                {% else %}
+                                    <a class="bg-blue-500 p-2 rounded-2xl hover:text-white"
+                                       href="{% url 'offer:giftMaker' offer.id %}">تکمیل
+                                        بازی </a>
+                                {% endif %}
+                            </td>
+
+                            <td data-th="ویرایش کمپین">
+                                {% if offer.Complete %}
+                                    <a class="bg-blue-500 p-2 rounded-2xl hover:text-white" href="{% url 'offer:pre-update' offer.id %}">ویرایش</a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+
+                        </tr>
+
+
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <br>
+            <p>هیچ کمپینی پیدا نشد :(</p>
+            </div>
+
+        {% endif %}
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'dashboard/_DashMain.html' %}
+{#{% block title %} {{ business.B_name }} پیش فاکتور  {% endblock %}#}
+{% load static %}
+{% load humanize %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/account_offers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account_overview.css' %}?=1">
+{% endblock %}
+{% block content %}
+    <div class="flex flex-col justify-center items-center w-[100vw]">
+        <h1 class=" text-3xl linear-background p-2 my-8 rounded-md text-gray-900 font-bold text-center"> پیش
+            فاکتور </h1>
+        <div id="table-container" class="table_container">
+
+            <table id="my-table" class="rwd-table">
+                <tbody>
+                <tr>
+                    <th class="font-bolder text-4">خریدار</th>
+                    <th class="font-bolder text-4">کد ملی/اقتصادی خریدار</th>
+                    <th class="font-bolder text-4">فروشنده</th>
+                    <!-- Add more table headers for additional order details -->
+                </tr>
+                <tr>
+                    <td data-th="خریدار">{{ business.B_name }}</td>
+                    <td data-th="کد ملی/اقتصادی خریدار">{{ business.Nationalcode }}</td>
+                    <td data-th="فروشنده"> ارسی</td>
+                    <!-- Add more table cells for additional i details -->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="table-container" class="table_container mt-10">
+
+            <table id="my-table" class="rwd-table">
+                <tbody>
+                <tr>
+
+                    <th class="font-bolder text-4">نام محصول</th>
+                    <th class="font-bolder text-4">قیمت محصول</th>
+                    <th class="font-bolder text-4">مالیات</th>
+                    <th class="font-bolder text-4">تخفیف</th>
+                    <th class="font-bolder text-4">قیمت نهایی</th>
+                    <!-- Add more table headers for additional order details -->
+                </tr>
+                <tr>
+                    <td data-th="نام محصول"><p id="name">{{ plan.title }}</p></td>
+                    <td data-th="قیمت محصول"><p id="price">تومان: {{ plan.price |  intcomma }}</p></td>
+                    <td data-th="مالیات"><p id="tax">{{ plan.Taxation }}</p></td>
+                    <td data-th="تخفیف"><p id="discount">%{{ plan.discount }}</p></td>
+                    <td data-th="قیمت نهایی" ><h6 id="FinalPrice">تومان: {{ plan.final_price | intcomma }}</h6></td>
+                    <!-- Add more table cells for additional i details -->
+                </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-center items-center flex-col">
+                <label class="my-5 text-black font-bold" for="discountIn">وارد کردن کد تخفیف</label>
+                <input style="box-shadow: rgba(184,184,192,0.63) 0px 30px 60px -12px inset, rgba(0,0,0,0.01) 0px 18px 36px -18px inset;" class="w-50 rounded-4 mb-5 p-4 h-9 text-black font-bold text-center placeholder-black" id="discountIn" type="text" placeholder="کد تخفیف">
+                <button onclick="CodeChecker()" class="inline-block w-[60%] px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px">اعمال کد تخفیف</button>
+                <br>
+                {% if mess %}{{ mess }}{% endif %}
+                <br>
+                <form action="{% url 'payment:request' plan.id %}" method="post">
+                    <input type="text" id="sendcode" name="code" value='00' hidden>
+                    {% csrf_token %}
+                    <button class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-2xl hover:-translate-y-px"
+                            type="submit">انتقال به درگاه بانک
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% block customjs %}
+            <script>
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                const csrftoken = getCookie('csrftoken');
+                const url = "{{baseUrl}}"
+
+                async function CodeChecker() {
+                    let discountP = document.getElementById("discount")
+                    let finalPrice = document.getElementById("FinalPrice")
+                    const code = document.getElementById("discountIn").value;
+                    let response = await fetch(`${url}payment/discountCodeChecker`, {
+                        method: "POST",
+                        body: JSON.stringify({
+                            code: code,
+
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                            'X-CSRFToken': csrftoken
+                        }
+                    });
+
+                    //alert(data["mess"])
+                    //alert(data["percent"])
+                    let data = await response.json();
+                    if (response.status == 200) {
+
+                        discountP.innerText = `%${data["percent"]}`;
+                        let calc = 100 - data["percent"]
+                        finalPrice.innerText =
+                        {{plan.final_price}} *
+                        calc / 100;
+                        finalPrice.style.color = "green";
+                        document.getElementById("sendcode").value = code;
+                    } else {
+                        alert(data["mess"])
+                    }
+                    ;
+                }
+            </script>
+
+        {% endblock %}
+    </div>
+{% endblock %}

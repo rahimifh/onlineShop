@@ -1,0 +1,197 @@
+<!-- account_overview.html -->
+
+{% extends 'dashboard/_DashMain.html' %}
+{% block title %}
+    <title>
+        در یک نگاه _ داشبورد
+    </title>
+{% endblock %}
+{% block content %}
+    {% load static %}
+    {% block customCss %}
+        <link rel="stylesheet" href="{% static 'css/account_overview.css' %}?=1">
+        <link rel="stylesheet" href="{% static 'css/account_offers.css' %}">
+    {% endblock %}
+
+    <div class="flex flex-col justify-center items-center text-center">
+        <h1 class="text-4xl linear-background p-2 rounded-md text-gray-900 font-bold text-center flex justify-center items-center mt-8 w-[80%]">
+            نمای کلی فعالیت شما</h1>
+        <br>
+        <br>
+        <div class="flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center text-center">
+                <h2 class="linear-background p-2 rounded-md text-5 text-gray-700 text-center  w-[80%]">تعداد
+                    شرکت‌کنندگان همه کمپین‌ها براساس تاریخ:</h2>
+                <br>
+                <!-- Bar chart container -->
+                <canvas class="canvas" id="customerChart" height="300"></canvas>
+            </div>
+            <div class="flex flex-col justify-center items-center text-center impo">
+                <h2 class="linear-background p-2 rounded-md text-5 text-gray-700 text-center mt-5">تعداد شرکت‌کنندگان هر
+                    کمپین:</h2>
+                <br>
+                <!-- Pie chart container -->
+                <canvas class="canvas" id="offerChart" height="300"></canvas>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center">
+                <h2 class="linear-background p-2 rounded-md text-5 text-gray-700 text-center mt-5">تعداد شرکت‌کنندگان
+                    آخرین کمپین براساس تاریخ:</h2>
+                <br>
+                <!-- Line chart container -->
+                <canvas class="canvas mb-5" id="lastOfferChart" height="300"></canvas>
+            </div>
+        </div>
+        <br>
+        <div class="flex flex-col justigy-center items-center">
+            <div class="flex flex-col justify-center items-center">
+
+                <h2 class="text-3xl linear-background p-2 my-8 rounded-md text-gray-900 font-bold text-center">آخرین
+                    شرکت‌کنندگان
+                    در {{ last_offer.title }}:</h2>
+                <br>
+                <div id="table-container" class="table_container">
+
+                    <table id="my-table" class="rwd-table">
+                        <tbody>
+                        <tr>
+                            <th class="font-bolder text-4">#</th>
+                            <th class="font-bolder text-4">پروفایل</th>
+                            <th class="font-bolder text-4">نام</th>
+                            <th class="font-bolder text-4">شماره تلفن</th>
+                            <th class="font-bolder text-4">تاریخ مشارکت</th>
+                            <th class="font-bolder text-4">امتیاز</th>
+                            <th class="font-bolder text-4">تعداد وایرال</th>
+                        </tr>
+                        {% for customer in last_offer_customers %}
+                            <tr>
+                                <td  data-th="#">{{ forloop.counter }}</td>
+                                <td  data-th="پروفایل"><img src="{% static 'img/default-profile.jpg' %}" alt="Profile Image" width="26" height="26">
+                                </td>
+                                <td  data-th="نام">{{ customer.name }}</td>
+                                <td  data-th="شماره تلفن">{{ customer.phone }}</td>
+                                <td  data-th="تاریخ مشارکت">{{ customer.date_participate|date:'Y-m-d' }}</td>
+                                <td  data-th="امتیاز">{{ customer.score }}</td>
+                                <td  data-th="تعداد وایرال">{{ customer.viral }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Bar chart
+            var customerChartCtx = document.getElementById('customerChart').getContext('2d');
+            var customerChart = new Chart(customerChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: {{ bar_chart_labels|safe }},
+                    datasets: [{
+                        label: 'تعداد شرکت‌کنندگان',
+                        data: {{ bar_chart_data|safe }},
+                        backgroundColor: 'rgba(0, 254, 255, 0.5)',
+                        borderColor: 'rgba(0, 254, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'تعداد'
+                            },
+                            ticks: {
+                                stepSize: 1.0
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'تاریخ'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Pie chart
+            var offerChartCtx = document.getElementById('offerChart').getContext('2d');
+            var offerChart = new Chart(offerChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: {{ pie_labels|safe }},
+                    datasets: [{
+                        data: {{ pie_data|safe }},
+                        backgroundColor: [
+                            'rgba(255, 191, 0, 0.5)',
+                            'rgba(0, 254, 255, 0.5)',
+                            'rgba(255, 99, 132, 0.5)'
+                            // Add more colors as needed
+                        ],
+                        borderColor: [
+                            'rgba(255, 191, 0, 1)',
+                            'rgba(0, 254, 255, 1)',
+                            'rgba(255, 99, 132, 1)'
+                            // Add more colors as needed
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            });
+
+            // Line chart
+            var lastOfferChartCtx = document.getElementById('lastOfferChart').getContext('2d');
+            var lastOfferChart = new Chart(lastOfferChartCtx, {
+                type: 'line',
+                data: {
+                    labels: {{ line_chart_labels|safe }},
+                    datasets: [{
+                        label: 'تعداد شرکت‌کنندگان',
+                        data: {{ line_chart_data|safe }},
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 0.5)',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'تعداد'
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'تاریخ'
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

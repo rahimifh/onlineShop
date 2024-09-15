@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*--------------Added Font--------------*/
+
+@font-face {
+  font-family: vazirMatnRegular;
+  src: url(../fonts/Vazirmatn-Medium.woff2) format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: vazirMatnBold;
+  src: url(../fonts/Vazirmatn-Bold.woff2) format("woff2");
+  font-display: fallback;
+}
+
+@layer components {
+    .active-link {
+      @apply relative after:absolute after:inset-y-0 after:-right-8 after:w-1.5 after:bg-[#f6d658] after:rounded-full;
+    }
+  
+    .active-link i {
+      @apply text-[#f6d658];
+    }
+  
+    .active-link span {
+      @apply text-slate-700;
+    }
+  
+    .avatar {
+      @apply rounded-full w-14 mx-auto aspect-square shadow-md;
+    }
+  }
+
+@layer utilities {
+    .px-content {
+      @apply xl:pr-72 xlg:pr-60  xl:pl-20;
+    }
+  }
+
+@layer components {
+    .box-deck {
+      @apply gap-6 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 grid;
+    }
+    .box {
+      @apply shadow-lg rounded-3xl bg-white max-w-md mx-auto w-full;
+    }
+    /* btn */
+    .new-btn{
+        @apply w-35 h-11 font-persianRegular text-[#000] bg-[#fff] border-none rounded-12 ;
+    }
+    .btn {
+      @apply px-4 py-3 md:py-5 md:px-12 rounded-full  shadow-md hover:scale-105 active:scale-100 transition-transform;
+    }    
+    .btnR {
+      @apply px-5  py-2 rounded-xl shadow-md hover:scale-105 active:scale-100 transition-transform md:py-3 md:px-2;
+    }
+    .btn-primary {
+      @apply bg-gradient-to-tl from-[#a100ff] to-blue-500 text-white hover:bg-[#c76dfc] hover:text-amber-50 hover:shadow-black transition-transform;
+    }
+    .btn-primary1 {
+      @apply bg-gradient-to-tl from-[#7CB9F1] to-blue-500 text-white hover:bg-[#c76dfc] hover:text-amber-50 hover:shadow-black transition-transform;
+    }
+
+    .btn-secondry{
+      @apply bg-[#AF19EF] text-white hover:bg-[#4B7BC4FF] hover:shadow-black;
+    }
+    .btn-blure {
+      @apply bg-white/30 backdrop-blur-lg;
+    }
+  
+    .btn-lg {
+      @apply rounded-xl text-lg px-8;
+    }
+    /* shadow */
+    .bg-y-shadow-md {
+      @apply bg-gradient-to-b from-black/40 via-black/0 to-black/40;
+    }
+    .bg-y-shadow-md {
+      @apply bg-gradient-to-b from-black/60 via-black/0 to-black/60;
+    }
+    .bg-y-shadow-lg {
+      @apply bg-gradient-to-b from-black/80 via-black/0 to-black/80;
+    }
+
+  }
+.linear-background{
+    background-image: linear-gradient(145deg, rgba(70, 65, 65, 0) 30%, rgba(181, 217, 250, 0.65) 100%, rgba(47, 35, 35, 0) 100%);
+}
+.linear-bg{
+    background-image: linear-gradient(-45deg, rgba(70, 65, 65, 0) 30%, rgba(54, 79, 101, 0.21) 100%, rgba(173, 127, 127, 0) 100%);
+}
+.btn-shadow{
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.btn-prevShadow{
+box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;}
+
+.box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.price-linear{
+    background-image: linear-gradient(145deg, rgba(70, 65, 65, 0) 30%, rgba(2, 132, 248, 0.65) 100%, rgba(47, 35, 35, 0) 100%);
+    padding: 5px;
+    border-radius: 16px;
+    width: 200px;
+}
