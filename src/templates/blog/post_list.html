@@ -1,0 +1,91 @@
+{% extends 'blog/post_base.html' %}
+
+{% load jalali_tags %}
+{% block custumemeta %}
+    <meta name="keywords" content="{% for category in categories %} {{ category.name }}, {% endfor %}">
+    <meta name="description"
+          content="مقلات  ارسی شامل آخرین اخبار و اطلاعات در حوضه ی بازاریابی تبلیغات و راه اندازی کمپین های تبلیغاتی و راهکارهای بهبود بهروری و اثربخشی کمپین های تبلیغاتی می باشد.">
+
+{% endblock %}
+
+{% block customCss %}
+{% endblock customCss %}
+
+{% block title %} مجله  ارسی {% endblock title %}
+
+{% block content %}
+    <div class="w-full mb-10 px-5 lg:px-0">
+        {% if posts %}
+            <div class="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-center items-start gap-5">
+                {% for post in posts %}
+                    <a class="shadow shadow-blur w-full h-full bg-white relative isolate flex flex-col overflow-hidden rounded-2xl mx-auto p-3 gap-2"
+                       href="{{ post.get_absolute_url }}">
+                        <div class="h-[150px] bg-primary rounded-t-xl overflow-hidden relative"
+                             style="border-radius: 16px">
+                            {% if post.post_image %}
+                                <img alt="{{ post.title }}"
+                                     src="{{ post.post_image.url }}"
+                                     class="w-full h-[150px] object-cover bg-primary object-center xl:object-center ease-in-out">
+                            {% else %}
+                                <div class="flex w-full justify-center items-center text-white/60 font-semibold h-[150px]">
+                                    بدون تصویر
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex-1 flex flex-col justify-between p-2 gap-3">
+                            <h3 class="text-sm md:text-base font-bold text-black">
+                                {{ post.title | truncatechars:50 }}</h3>
+                            <div class="text-sm leading-6 text-gray-600">{{ post.summary }}</div>
+                            <div class="text-gray-600 text-xs flex items-center gap-3 justify-between">
+                                <div class="divide-y flex gap-2">
+                                    {{ post.confirmed_comments.count }} نظر
+                                    <span dir="ltr">{{ post.JaliliDatepublished }}</span>
+                                </div>
+                                <button class="flex gap-1 items-center hover:gap-2 transition-all">ادامه مطلب<i
+                                        class="fa-solid fa-arrow-left"></i></button>
+                            </div>
+                        </div>
+
+                    </a>
+                {% endfor %}
+            </div>
+            <ul class="flex gap-2 text-xs p-5 items-center w-full justify-center mt-5">
+                <li><a class="page-link hover:font-bold transition-all ease-in-out"
+                       href="?page=1">صفحه اول</a></li>
+
+                {% if page.has_previous %}
+                    <li>
+                        <a class="border border-gray-400 rounded-[12px] px-3 py-1 hover:border-black hover:font-bold transition-all ease-in-out hover:shadow-2xl"
+                           href="?page={{ page.previous_page_number }}"><i
+                                class="fa-solid fa-arrow-right text-[10px] text-gray-600 hover:text-black"></i></a></li>
+                {% endif %}
+
+                {% for num in page.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="border border-gray-400 rounded-[12px] px-3 py-1 hover:border-black hover:font-bold transition-all ease-in-out hover:shadow-2xl {% if num == page.number %} text-primary font-bold border-2 border-primary{% endif %}"
+                           href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                {% if page.has_next %}
+                    <li><a
+                            class="border border-gray-400 rounded-[12px] px-3 py-1 hover:border-black hover:font-bold transition-all ease-in-out hover:shadow-2xl"
+                            href="?page={{ page.next_page_number }}"><i
+                            class="fa-solid fa-arrow-left text-[10px] text-gray-600 hover:text-black"></i></a></li>
+                {% endif %}
+
+                <li><a class="page-link hover:font-bold transition-all ease-in-out"
+                       href="?page={{ page.paginator.num_pages }}">صفحه آخر</a></li>
+
+
+            </ul>
+        {% else %}
+            <div class="w-full flex justify-center min-h-[300px] mt-10">
+                <h2 class="text-xl">مجله ای یافت نشد!</h2>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock content %}
+{% block customjs %}
+{% endblock customjs %}

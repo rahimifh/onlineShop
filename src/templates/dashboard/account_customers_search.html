@@ -1,0 +1,42 @@
+{% load static %}
+
+{% load humanize %}
+
+
+{% block content %}
+<table class="table search-results" id="search-results" >
+      <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>نام</th>
+          <th>ایمیل</th>
+          <th>شماره تلفن</th>
+          <th>امتیاز</th>
+          <th>تعداد وایرال</th>
+          <th>تاریخ مشارکت</th>
+          <th>جایزه</th>
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for customer in data %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ customer.account.name }} {{customer.account.last_name}}</td>
+            <td>{{ customer.account.email }}</td>
+            <td>{{ customer.account.username }}</td>
+            <td>{{ customer.score }}</td>
+            <td>{{ customer.viral_counter }}</td>
+            <td>{{ customer.date_participate }}</td>
+            {% if customer.Gift == None %}
+              <td>نگرفته</td>
+            {% else %}
+              <td>{{ customer.Gift }}</td>
+            {% endif %}
+            <!-- Add more cells and retrieve other customer information -->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}

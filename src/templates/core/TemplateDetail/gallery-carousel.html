@@ -1,0 +1,35 @@
+{% load static %}
+{% block content %}
+    <div id="image-carousel" class="splide" dir="ltr">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide rounded-xl overflow-hidden p-2"><img class="rounded-xl" src="{% static 'img/landing/OurGames/1.png' %}" alt="Image 1"></li>
+                <li class="splide__slide rounded-xl overflow-hidden p-2"><img class="rounded-xl" src="{% static 'img/landing/OurGames/2.png' %}" alt="Image 2"></li>
+                <li class="splide__slide rounded-xl overflow-hidden p-2"><img class="rounded-xl" src="{% static 'img/landing/OurGames/3.png' %}" alt="Image 3"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#image-carousel', {
+                type: 'loop',
+                perPage: 3,
+                breakpoints: {
+                    450: {
+                        perPage: 1,
+                    },
+                    600: {
+                        perPage: 2,
+                    },
+                    1024: {
+                        perPage: 3,
+                    },
+                },
+                autoplay: true,
+                interval: 3000,
+            }).mount();
+        });
+
+    </script>
+{% endblock %}

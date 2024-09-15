@@ -1,0 +1,84 @@
+{% extends "core/shared/_MainLayout.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    <title>
+        تعرفه ها
+    </title>
+{% endblock %}
+{% block custumemeta %}
+    <meta name="title" content="  تعرفه های ساخت بازی تبلیغاتی در  ارسی">
+    <meta name="description"
+          content="هزینه پرداخت شده در تعرفه های  ارسی در ازای خدماتی مثل ساخت بازی و پیامک احرازهویت کاربر و استفاده از آپشن های مثل سورلینک و واریرال کمپین های بیزینس، نصب اپلیکشن شما گرفته می شود">
+    <meta name="keywords" content=" ارسی , تعرفه های  ارسی , سورلینک, ,وایرال, پیامک, سااخت بازی تبلیغاتی ">
+    <meta name="robots" content="noindex">
+
+{% endblock %}
+{% block content %}
+    <main class="w-full max-w-7xl mx-auto flex flex-col gap-10 my-10">
+        <div class="flex flex-col justify-center items-center mt-5 md:mt-10 w-full text-center px-5">
+            <h1 class="text-bold text-xl md:text-2xl lg:text-3xl font-bold my-10 mb-5">تعرفه بازی های تبلیغاتی پلتفرم  ارسی 💸</h1>
+            <p class="font-medium text-xs md:text-base text-gray-600">
+                مطابق اهداف کسب و کارتان یکی از اشتراک بازی ها را انتخاب کنید.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 items-start px-5 md:px-10 gap-10 md:gap-7 xl:gap-10 justify-center mb-10">
+            {% for sub in subscriptions %}
+                <div class="min-h-[300px] w-full h-full flex flex-col justify-between bg-white rounded-2xl p-5 shadow-blur shadow-lg">
+                {# card header #}
+                <div class="flex items-center gap-3 pb-3 mb-3 border-b">
+                    <div class="relative h-16 w-16 rounded-2xl bg-secondary-500 overflow-hidden">
+                        <div class="w-10 h-10 bg-white opacity-50 rounded-full absolute"
+                             style="top: -8px; right: -5px"></div>
+                        <div class="w-10 h-10 bg-white opacity-50 absolute"
+                             style="bottom: -15px; left: -12px; transform: rotate(65deg)"></div>
+                    </div>
+                    <div class="flex flex-col">
+                        <h3 class="font-semibold">{{ sub.title }}</h3>
+                        <div class="flex gap-1 items-center text-gray-600">
+                            {% if sub.price == 0 %}
+                                <span class="font-medium text-primary">رایگان!</span>
+                            {% else %}
+                                <span class="font-medium text-black">{{ sub.price | intcomma }}</span>تومان
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {# card body #}
+                <div class="flex flex-col h-full gap-3 mb-3">
+
+                {% if sub.description %}
+                    <div class="flex gap-1 items-start text-sm">{{ sub.description | safe }}</div>
+                {% endif %}
+                {% if sub.features %}
+                    {{ sub.features | safe }}
+                {% endif %}
+
+                {% if sub.gifts %}
+                    <div class="flex gap-1 items-start text-sm text-primary">🎁{{ sub.gifts | safe }}
+                    </div>
+                {% endif %}
+            {# footer button #}
+            <div class="flex-1 flex flex-col justify-end">
+                {% if sub.final_price != 0 and sub not in business_subs %}
+                    <a href="{% url 'payment:request' sub.id %}">
+                        <button type="button"
+                                class="flex gap-1 hover:gap-2 transition-all justify-center items-center bg-secondary-500 w-full rounded-lg p-2 px-5 text-white">
+                            انتخاب اشتراک
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                        </button>
+                    </a>
+                {% else %}
+                    <button class="bg-secondary-500 w-full rounded-lg p-2 px-5 text-white opacity-50"
+                            disabled>
+                        برای این اشتراک تماس بگیرید!
+                    </button>
+                {% endif %}
+            </div>
+            </div>
+            </div>
+            {% endfor %}
+            </div>
+    </main>
+{% endblock %}

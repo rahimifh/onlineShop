@@ -1,0 +1,64 @@
+<!-- account_orders.html -->
+
+{% extends 'dashboard/_DashMain.html' %}
+{% load static %}
+{% block title %}
+    <title>
+        تاریخچه سفارشات _ داشبورد
+    </title>
+{% endblock %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/account_offers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account_overview.css' %}?=1">
+{% endblock %}
+{% block content %}
+    <div class="flex flex-col justigy-center items-center w-[100vh] mb-5">
+        <div class="flex flex-col justify-center items-center">
+            <h1 class=" text-3xl linear-background p-2 my-8 rounded-md text-gray-900 font-bold text-center">سفارشات
+                شما</h1>
+            {% if orders %}
+                <div id="table-container" class="table_container">
+
+                <table id="my-table" class="rwd-table">
+                    <tbody>
+                    <tr>
+                        <th class="font-bolder text-3">شناسه</th>
+                        <th class="font-bolder text-3">فروشنده</th>
+                        <th class="font-bolder text-3">پلن خریداری‌شده</th>
+                        <th class="font-bolder text-3">تاریخ</th>
+                        <th class="font-bolder text-3">وضعیت پرداخت</th>
+                        <th class="font-bolder text-3">قیمت</th>
+                        <th class="font-bolder text-3">تخفیف</th>
+                        <th class="font-bolder text-3">قیمت نهایی</th>
+                        <!-- Add more table headers for additional order details -->
+                    </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td data-th="شناسه">{{ order.id }}</td>
+                            <td data-th="فروشنده">{{ order.Seller }}</td>
+                            <td data-th="پلن خریداری‌شده">{{ order.plan }}</td>
+                            <td data-th="تاریخ">{{ order.date_create }}</td>
+                            {% if order.paid == True %}
+                                <td data-th="وضعیت پرداخت"><label
+                                        class="bg-green-700 text-gray-600 p-2 rounded-2xl hover:text-white">موفق</label>
+                                </td>
+                            {% else %}
+                                <td data-th="وضعیت پرداخت"><label
+                                        class="bg-red-700 text-gray-600 p-2 rounded-2xl hover:text-white">ناموفق</label>
+                                </td>
+                            {% endif %}
+                            <td data-th="قیمت">{{ order.price }}</td>
+                            <td data-th="تخفیف">{{ order.discount }}</td>
+                            <td data-th="قیمت نهایی">{{ order.final_price }}</td>
+                            <!-- Add more table cells for additional order details -->
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>هیچ سفارشی پیدا نشد!</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

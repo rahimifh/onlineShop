@@ -1,0 +1,91 @@
+{% load static %}
+<div class="relative w-full flex flex-col my-16 lg:my-24 2xl:my-10 lg:min-h-[460px]">
+     <h4
+            class="relative 2xl:top-20 text-black text-center text-xl md:text-2xl lg:text-4xl font-bold mb-10 md:mb-10">نمونه ای از کمپین های بازی محور</h4>
+    {#    1 row      #}
+    <ul class="hidden 2xl:flex 2xl:top-44 3xl:-left-16 3xl:-right-16 2xl:absolute gap-7 items-center" id="card-box">
+        {#  Rozha  #}
+        <li class="rounded-[20px] overflow-hidden w-2/6 h-[200px]">
+            <a class="h-full" href="{% url "core:vip_projects" "daity" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right" alt="daity"
+                         src="{% static "img/landing/LatestCampaigns/Rozha.png" %}">
+                </div>
+            </a>
+        </li>
+        {#  Daity Batman  #}
+        <li class="rounded-[20px] overflow-hidden w-2/5 h-[250px]">
+            <a class="h-full" href="{% url "core:vip_projects" "daity" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right" alt="daity"
+                         src="{% static "img/landing/LatestCampaigns/DaityBatman.png" %}">
+                </div>
+            </a>
+        </li>
+        {#  Anten  #}
+        <li class="rounded-[20px] overflow-hidden w-2/6 h-[200px]">
+            <a class="h-full" href="{% url "core:vip_projects" "anten" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right" alt="anten"
+                         src="{% static "img/landing/LatestCampaigns/AntenFootball.png" %}">
+                </div>
+            </a>
+        </li>
+        {#  XVision  #}
+        <li class="rounded-[20px] overflow-hidden w-2/5 h-[250px]">
+            <a class="h-full" href="{% url "core:vip_projects" "xvision" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right" alt="xvision"
+                         src="{% static "img/landing/LatestCampaigns/XVision.png" %}">
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    {#    2 row    #}
+    <ul class="2xl:hidden flex gap-4 items-end mb-4" id="card-box">
+        <li class="h-[150px] md:h-[210px] lg:h-[340px] pr-5 w-1/2">
+            <a class="rounded-[20px] overflow-hidden customShadow shadow-secondary-400/40"
+               href="{% url "core:vip_projects" "anten" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right rounded-[20px]" alt="anten"
+                         src="{% static "img/landing/LatestCampaigns/AntenFootball.png" %}">
+                </div>
+            </a>
+        </li>
+        <li class="h-[190px] md:h-[250px] lg:h-[400px] w-1/2">
+            <a class="rounded-[20px] rounded-l-none overflow-hidden customShadow shadow-secondary-400/40"
+               href="{% url "core:vip_projects" "xvision" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right rounded-[20px] rounded-l-none" alt="xvision"
+                         src="{% static "img/landing/LatestCampaigns/XVision.png" %}">
+                </div>
+            </a>
+        </li>
+    </ul>
+    <ul class="2xl:hidden flex gap-4 items-start" id="card-box">
+        <li class="h-[190px] md:h-[250px] lg:h-[400px] w-1/2">
+            <a class="rounded-[20px] rounded-l-none overflow-hidden customShadow shadow-secondary-400/40"
+               href="{% url "core:vip_projects" "daity" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right rounded-[20px] rounded-r-none" alt="daity"
+                         src="{% static "img/landing/LatestCampaigns/DaityBatman.png" %}">
+                </div>
+            </a>
+        </li>
+        <li class="h-[150px] md:h-[210px] lg:h-[340px] pl-5 w-1/2">
+            <a class="rounded-[20px] overflow-hidden customShadow shadow-secondary-400/40"
+               href="{% url "core:vip_projects" "rozha" %}">
+                <div class="h-full">
+                    <img class="w-full h-full object-cover object-right rounded-[20px]" alt="anten"
+                         src="{% static "img/landing/LatestCampaigns/Rozha.png" %}">
+                </div>
+            </a>
+        </li>
+    </ul>
+
+{#    <a href="{% url 'core:last_games' %}" class="customButton p-3 2xl:-bottom-10 2xl:left-0 2xl:right-0 2xl:absolute mx-auto">#}
+{#        <div class="flex items-center justify-center gap-3 h-full rounded-[20px] text-secondary font-semibold text-base text-center p-5 px-7 my-10 2xl:text-xl">#}
+{#            مشاهده همه کمپین ها <i class="fa-solid fa-business-time"></i></div>#}
+{#    </a>#}
+</div>

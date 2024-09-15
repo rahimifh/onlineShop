@@ -1,0 +1,30 @@
+<!-- account_orders.html -->
+
+{% extends 'dashboard/_DashMain.html' %}
+{% block content %}
+  <h1>Account Orders</h1>
+  {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <!-- Add more table headers for additional order details -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in sub %}
+          <tr>
+            <td>{{ i.title }}</td>
+            <td>{{ i.final_price }}</td>
+            <td>{{ i.description }}</td>
+            <!-- Add more table cells for additional i details -->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>هیچ سفارشی پیدا نشد!</p>
+  {% endif %}
+{% endblock %}

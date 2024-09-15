@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+ {% load static %}
+<html>
+<head>
+    <script src="G/asd.js"> </script>
+    <script>
+        var vPause = false;
+        var vSound = false;
+        
+        function pauseFunc() {
+            vPause = !vPause;
+            document.getElementById('myIframe').contentWindow.postMessage('pause-'+ vPause, '*');
+        }
+
+        function soundFunc() {
+            vSound = !vSound;
+            document.getElementById('myIframe').contentWindow.postMessage('sound-'+ vSound, '*');
+        }
+
+        window.onmessage = function(e) {
+            if (e.data != "" && e.data != null && typeof e.data !== 'object') {
+                alert(e.data);   
+            }
+            
+        };
+    </script>
+</head>
+<body>
+
+<iframe src="{% static 'G/index.html' %}"  id="myIframe" width="640" height="480">
+</iframe>
+
+<button type="button" onclick="pauseFunc();" >Pause</button>
+
+<button type="button" onclick="soundFunc();" >Sound</button>
+
+
+</body>
+</html>
