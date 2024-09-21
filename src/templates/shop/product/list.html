@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+{#  Hero  #}
+{% include 'shop/components/Hero.html' %}
+
+  <div id="main" class="product-list">
+    <div class="flex justify-start items-center w-full text-black font-extrabold"  id="sidebar">
+      <h3 class="w-40">دسته بندی</h3>
+      <div class="flex justify-around items-center w-96">
+        <div class="bg-blue-400 w-32 h-12 rounded-sm" {% if not category %}class="bg-green-400 w-32 h-12 rounded-sm"{% endif %}>
+          <a href="{% url "shop:product_list" %}">همه</a>
+        </div>
+        {% for c in categories %}
+          <div class="bg-blue-400 w-32 h-12 rounded-sm" {% if category.slug == c.slug %}class="bg-green-400 w-32 h-12 rounded-sm"{% endif %}>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </div>
+        {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+    {% for product in products %}
+      <div class="item">
+        <a href="{{ product.get_absolute_url }}">
+          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <br>
+        T{{ product.price }}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

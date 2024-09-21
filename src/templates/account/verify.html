@@ -1,0 +1,137 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> اعتبار سنجی </title>
+    <link href="{% static 'css/output.css' %}?v=3" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- affili tag -->
+    <script async src="https://analytics.affili.ir/scripts/affili-v2.js"></script>
+    <script>
+        window.affiliData = window.affiliData || [];
+
+        function affili() {
+            affiliData.push(arguments);
+        }
+
+        affili('create');
+    </script>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFT3CZV540"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LFT3CZV540');
+    </script>
+
+    </script>
+
+    <!-- Hotjar Tracking Code for my site -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            h._hjSettings = {hjid: 3612823, hjsv: 6};
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script');
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        .bg-wave-pattern {
+            background-image: url("{% static 'img/svg-patterns/uuunion.svg' %}");
+        }
+    </style>
+</head>
+
+<body class="w-full bg-[#F1F5F9]">
+<main class="h-screen w-full max-w-7xl mx-auto flex flex-col">
+    <div class="w-full h-full flex justify-center items-center">
+        <div class="relative h-screen w-full xl:w-[80%] xl:h-[90vh] xl:max-h-[1000px] bg-white rounded-xl flex flex-col xl:flex-row overflow-hidden gap-10 xl:gap-0 justify-center items-center"
+             style="box-shadow: 0 12px 40px rgba(132,58,191,0.30)">
+            <a href="{% url "core:home" %}"
+               class="text-xs text-gray-600 font-medium mb-5 p-1 w-fit absolute hidden xl:block"
+               style="top:15px; right: 15px"><i class="fa-solid fa-arrow-right"></i> بازگشت به سایت اصلی</a>
+            {#    Form    #}
+            <div class="w-full max-w-3xl xl:h-full flex flex-col xl:w-1/2 p-10 xl:justify-center overflow-y-auto">
+                <a href="{% url "core:home" %}" class="text-[10px] font-medium mb-5 p-1 w-fit xl:hidden"
+                   style="top:10px; right: 10px"><i class="fa-solid fa-arrow-right"></i> بازگشت به سایت اصلی</a>
+                {% if status == "1" %}
+                    <div class="flex-col flex gap-2 mb-5">
+                        <h1 class="text-bold text-lg md:text-xl xl:text-2xl font-bold text-center">
+                            تایید شماره تلفن همراه</h1>
+                        <p class="text-center text-gray-600">لطفا شماره تلفن خود را وارد کنید.</p>
+                    </div>
+                    <div>
+                        <form role="form" method="post" action="{% url 'account:verify' dir %}"
+                              class="flex flex-col gap-3">
+                            {% csrf_token %}
+                            <input type="text" name="status" value="1" hidden>
+
+                            <input type="tel" name="number" placeholder="09012345678"
+                                   class="font-semibold px-4 w-full h-12 rounded-xl border border-gray-300 bg-slate-100 text-end">
+
+                            {# SUBMIT BUTTON #}
+                            <div class="flex flex-col gap-3 items-center justify-center text-center">
+                                <button class="w-full button customShadow shadow-primary-50/20 px-10 font-medium text-xl bg-primary before:bg-primary-500 text-white flex gap-2 items-center justify-center"
+                                        type="submit">ارسال
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+                {% if status == "2" %}
+                    <div class="flex-col flex gap-2 mb-5">
+                        <h1 class="text-bold text-lg md:text-xl xl:text-2xl font-bold text-center">
+                            اعتبارسنجی</h1>
+                        <p class="text-center text-gray-600">لطفا کد ارسال شده به شماره تلفن همراه خود را وارد کنید.</p>
+                    </div>
+                    <div>
+                        <form role="form" method="post" action="{% url 'account:verify' dir %}"
+                              class="flex flex-col gap-3">
+                            {% csrf_token %}
+                            <input type="text" name="status" value="2" hidden>
+
+                            <input type="number" name="code" placeholder="کد ارسالی به تلفن شما"
+                                   class="font-semibold px-4 w-full h-12 rounded-xl border border-gray-300 bg-slate-100 text-start">
+
+                            {# SUBMIT BUTTON #}
+                            <div class="flex flex-col gap-3 items-center justify-center text-center">
+                                <button class="w-full button customShadow shadow-primary-50/20 px-10 font-medium text-xl bg-primary before:bg-primary-500 text-white flex gap-2 items-center justify-center"
+                                        type="submit">ارسال
+                                </button>
+                            </div>
+
+                            <p class="text-center mt-2"><a class="text-secondary"
+                                                           href="{% url 'account:verify' "signup" %}">تلفن همراه را به طور صحیح وارده نکرده اید؟</a>
+                            </p>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            {#    pic    #}
+            <div class="w-full fixed top-0 h-[10vh] xl:relative xl:top-auto
+             xl:block xl:h-full xl:w-1/2 bg-wave-pattern bg-no-repeat bg-cover rounded-b-2xl overflow-hidden xl:rounded-none ">
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
