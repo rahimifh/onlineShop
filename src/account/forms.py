@@ -3,33 +3,16 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from account.models import Account, Business
+from account.models import Account
 
 
-class UserBusiness(forms.ModelForm):
-    class meta:
-        # To specify the model to be used to create form
-        model = Business
-        fields = (
-            "B_name",
-            "category",
-            "Nationalcode",
-            "web_address",
-            "social_network",
-            "shop_address",
-            "description",
-            "B_phone",
-            "online",
-            "ofline",
-            "profile_imag",
-        )
 
 
 class PersonDetailForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonDetailForm, self).__init__(*args, **kwargs)
         self.user = kwargs.pop("user", None)  # getting kwargs
-        self.fields["name"].widget.attrs.update(
+        self.fields["firstName"].widget.attrs.update(
             {"class": "px-4 my-4 w-full h-12 rounded-xl border-gray-100 bg-slate-100"}
         )
         self.fields["email"].widget.attrs.update(
@@ -41,9 +24,9 @@ class PersonDetailForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ("name", "email", "password")
+        fields = ("firstName", "email", "password")
         labels = {
-            "name": "نام و نام خانوادگی ",
+            "firstName": "نام و نام خانوادگی ",
             "email": "ایمیل ",
             "username": "شماره همراه",
             "password": "رمز عبور",
@@ -81,7 +64,7 @@ class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = (
-            "name",
+            "firstName",
             "username",
             "phone",
             "country",

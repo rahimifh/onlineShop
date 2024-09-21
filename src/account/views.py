@@ -1,4 +1,5 @@
 import datetime
+import random
 import jdatetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -8,13 +9,12 @@ from django.shortcuts import redirect, render
 from unidecode import unidecode
 
 
-
 from account.sms import veri_cod
 
 from .forms import AccountUpdateForm, PersonDetailForm
-from .models import Account, Business, Category, ver_code
+from .models import Account, ver_code
 from .sms import smsSender
-import random
+
 def generate_otp():
     code = str(random.randrange(100000, 999999))
     return code
@@ -33,7 +33,7 @@ def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     """
     if request.user.is_authenticated:
         messages.warning(request, "شما هم اکنون در حساب کاربری خود هستید.")
-        return redirect("dashboard:account_overview")
+        return redirect("shop:product_list")
 
     next_url = request.GET.get("next") or ""
 
@@ -359,65 +359,6 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
 # ------------------------------------------------------------------
 
 
-@login_required
-def signUpBusiness(request: HttpRequest):
-    """
-    View for business signup and profile creation.
-
-    This view allows authenticated users to create a business profile and provide various details about their business.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-
-    Returns:
-        HttpResponseRedirect: After successful business profile creation, users are redirected to the 'account_offer_templates' view.
-
-    """
-    account = request.user
-    if request.method == "POST":
-        B_name = request.POST.get("B_name")
-        # category = Category.objects.filter(id=int(request.POST.get("category")))
-        # Nationalcode = request.POST.get("Nationalcode")
-        # web_address = request.POST.get("web_address")
-        # social_network = request.POST.get("social_network")
-        # shop_address = request.POST.get("shop_address")
-        # description = request.POST.get("description")
-        # B_phone = request.POST.get("B_phone")
-        # online = True if request.POST.get("online") == "on" else False
-        # ofline = True if request.POST.get("ofline") == "on" else False
-        # profile_image = request.FILES.get("profile_image")
-
-        if len(Business.objects.filter(account=account)) == 0:
-            bu = Business(
-                account=account,
-                B_name=B_name,
-                # Nationalcode=Nationalcode,
-                # web_address=web_address,
-                # social_network=social_network,
-                # shop_address=shop_address,
-                # description=description,
-                # B_phone=B_phone,
-                # online=online,
-                # ofline=ofline,
-                # profile_image=profile_image,
-            )
-            bu.save()
-            # bu.category.set(category)
-            bu.subscription = 1
-            bu.save()
-            account.is_Business = True
-            account.save()
-    
-
-
-        return redirect("dashboard:account_offer_templates")
-
-    categories = Category.objects.all()
-
-    return render(request, "dashboard/business_signUp.html", {"categories": categories, "user": account})
-
-
-# ------------------------------------------------------------------
 
 
 @login_required
@@ -472,99 +413,3 @@ def UpdateAccount(request: HttpRequest) -> HttpResponseRedirect:
 # ------------------------------------------------------------------
 
 
-@login_required
-def UpdateBusiness(request: HttpRequest) -> HttpResponseRedirect:
-    """
-    View for updating business profile information.
-
-    This view allows authenticated users with a business profile to update their business information, including
-    business name, contact details, and profile picture.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-
-    Returns:
-        HttpResponseRedirect: After successfully updating the business profile information, users are redirected to the 'account_info' view.
-
-    Exceptions:
-        - The view expects POST requests for updating the business information. If the request method is not POST,
-          users are redirected to an 'error' page.
-
-    """
-    if request.method == "POST":
-        user = request.user
-        business = Business.objects.get(account=user)
-        business.B_name = request.POST.get("B_name")
-        business.Nationalcode = request.POST.get("Nationalcode")
-        business.web_address = request.POST.get("web_address")
-        business.social_network = request.POST.get("social_network")
-        business.shop_address = request.POST.get("shop_address")
-        business.B_phone = request.POST.get("B_phone")
-        business.profile_image = request.FILES.get("profile_image")
-        business.save()
-
-        return redirect("dashboard:account_info")
-    else:
-        return render(request, "error.html")
-
-
-# ------------------------------------------------------------------
-
-
-@login_required
-def updateBusiness(request: HttpRequest, business_id: int) -> HttpResponseRedirect:
-    """
-    View for updating business profile information.
-
-    This view allows authenticated users to update their business profile information, including
-    category, social network, shop address, description, phone number, and profile picture.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-        business_id (int): The ID of the business profile to be updated.
-
-    Returns:
-        HttpResponseRedirect: After successfully updating the business profile information, users are redirected to the 'account_overview' view.
-
-    """
-    DEFAULT_CATEGORY_ID = 1
-    business = Business.objects.get(id=business_id, account=request.user)
-    if request.method == "POST":
-        category_id = request.POST.get("category")
-        if category_id is None:
-            category_id = DEFAULT_CATEGORY_ID
-        category = Category.objects.get(id=int(category_id))
-        social_network = request.POST.get("social_network")
-        if social_network is None:
-            social_network = business.social_network
-        shop_address = request.POST.get("shop_address")
-        if shop_address is None:
-            shop_address = business.shop_address
-        description = request.POST.get("description")
-        if description is None:
-            description = business.description
-        B_phone = request.POST.get("B_phone")
-        if B_phone is None:
-            B_phone = business.B_phone
-        profile_image = request.FILES.get("profile_image")
-        if profile_image is None:
-            profile_image = business.profile_image
-
-        business.B_name = business.B_name  # No change in business name
-        business.Nationalcode = business.Nationalcode  # No change in national code
-        business.web_address = business.web_address  # No change in web address
-        business.social_network = social_network
-        business.shop_address = shop_address
-        business.description = description
-        business.B_phone = B_phone
-        business.online = business.online
-        business.ofline = business.ofline
-        business.category.set([category])
-        business.profile_image = profile_image
-
-        business.save()
-
-        return redirect("dashboard:account_overview")
-
-
-# ------------------------------------------------------------------

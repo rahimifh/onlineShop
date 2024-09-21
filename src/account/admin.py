@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
-from account.models import Account, Business, Category, sitesToken, ver_code
+from account.models import Account, ver_code
 
 
 class UserCreationForm(forms.ModelForm):
@@ -20,7 +20,7 @@ class UserCreationForm(forms.ModelForm):
         model = Account
         fields = (
             "password",
-            "name",
+            "firstName",
             "last_Name",
             "username",
             "phone",
@@ -66,7 +66,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ("username", "password", "is_active", "is_Business")
+        fields = ("username", "password", "is_active", "is_admin")
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -83,7 +83,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("id", "username", "date_joined", "is_active", "is_Business", "name")
+    list_display = ("id", "username", "date_joined", "is_active", "is_admin", "firstName")
     list_filter = ("is_admin",)
     fieldsets = (
         (
@@ -91,7 +91,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "password",
-                    "name",
+                    "firstName",
                     "last_Name",
                     "username",
                     "phone",
@@ -104,7 +104,7 @@ class UserAdmin(BaseUserAdmin):
                     "social_media",
                     "address",
                     "profile_image",
-                    "profile_image_thumbnail",
+                  
                 )
             },
         ),
@@ -114,7 +114,6 @@ class UserAdmin(BaseUserAdmin):
                 "fields": (
                     "is_EmailVerified",
                     "is_admin",
-                    "is_Business",
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -140,25 +139,10 @@ class ver_codeAdmin(admin.ModelAdmin):
     list_display = ["phone", "code", "id"]
 
 
-@admin.register(Category)
-class AccountAdmin(admin.ModelAdmin):
-    list_display = ["title", "id", "Maincategory"]
 
 
 admin.site.register(Account, UserAdmin)
 admin.site.unregister(Group)
 
 
-@admin.register(sitesToken)
-class sitesTokenAdmin(admin.ModelAdmin):
-    list_display = ["siteUrl", "Token"]
 
-
-# add Business profile to admin page
-@admin.register(Business)
-class BusinessAdmin(admin.ModelAdmin):
-    list_display = ["account", "id", "B_name", "Nationalcode", "Business_level"]
-    list_filter = ["category", "Business_level"]
-    # list_editable = ['title_fa', 'available']
-    # prepopulated_fields = {'slug': ('name',)}
-    search_fields = ["account", "category"]

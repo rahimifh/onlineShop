@@ -46,7 +46,7 @@ class MyAccountManager(BaseUserManager):
             # email = email,
             password=password,
         )
-        user.is_Business = True
+      
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -63,7 +63,7 @@ def get_default_profile_image():
 
 
 class Account(AbstractBaseUser):
-    name = models.CharField(max_length=40, verbose_name="نام")
+    firstName = models.CharField(max_length=40, verbose_name="نام")
     last_Name = models.CharField(max_length=40, verbose_name="نام خانوادگي")
     # STATUS=(('student','Student'),('teacher','Teacher'),)
     username = models.CharField(verbose_name="نام كاربري", max_length=30, unique=True)
@@ -103,6 +103,7 @@ class Account(AbstractBaseUser):
     )
     
 
+
     USERNAME_FIELD = "username"
     # REQUIRED_FIELDS = ['email']
 
@@ -128,57 +129,9 @@ class Account(AbstractBaseUser):
         )
 
 
-class Category(models.Model):
-    CATEGORY_LIST = (("فروشگاه", "فروشگاه"), ("خدمات", "خدمات"), ("تولیدی", "تولیدی"))
-    title = models.CharField(max_length=30, verbose_name="نام دسته بندی")
-    Maincategory = models.CharField(
-        max_length=20, choices=CATEGORY_LIST, verbose_name="نوع کسب و کار"
-    )
-
-    def __str__(self):
-        return self.title
 
 
-class Business(models.Model):
-    LEVEL = (("a", "A"), ("b", "B"), ("c", "C"), ("d", "D"), ("e", "E"))
-    account = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name="businesses", on_delete=models.CASCADE
-    )
-    B_name = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name="نام کسب و کار "
-    )
-    subscription = models.PositiveIntegerField(default=1, verbose_name="ای دی اشتراک")
-    expiration = models.DateTimeField(
-        null=True, blank=True, verbose_name="انقضای اشتراک"
-    )
-    SMS_number = models.IntegerField(default=100, verbose_name="تعداد اس ام اس")
-    category = models.ManyToManyField(Category, blank=True, verbose_name=" دسته کسب و کار ")
-    Nationalcode = models.CharField(max_length=20, verbose_name="کد ملی")
-    web_address = models.CharField(max_length=200, null=True, blank=True)
-    social_network = models.CharField(max_length=200, null=True, blank=True)
-    shop_address = models.CharField(max_length=200, null=True, blank=True)
-    description = models.CharField(max_length=300, null=True, blank=True)
-    B_phone = models.CharField(max_length=13, verbose_name="تلفن")
-    Business_level = models.CharField(
-        max_length=20, choices=LEVEL, default="e", verbose_name="امتیاز"
-    )
-    online = models.BooleanField(null=True, default=None)
-    ofline = models.BooleanField(null=True, default=None)
-    VIP = models.BooleanField(null=True, blank=True)
-    profile_image = models.ImageField(
-        max_length=255,
-        upload_to=upload_image_path,
-        null=True,
-        blank=True,
-        default=get_default_profile_image,
-    )
-    
 
-    
-    sms_template = models.PositiveIntegerField(default=100000, verbose_name="کد قالب sms")
-
-    def __str__(self):
-        return f"{self.B_name}"
 
 
 # Create your models here.
@@ -190,9 +143,3 @@ class ver_code(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     
 
-class sitesToken(models.Model):
-    siteUrl = models.CharField(max_length=100)
-    Token = models.CharField(max_length=100, unique=True)
-
-    def __str__(self) -> str:
-        return self.siteUrl

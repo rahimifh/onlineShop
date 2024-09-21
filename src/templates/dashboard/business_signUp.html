@@ -1,162 +1,0 @@
-{% extends 'dashboard/_DashMain.html' %}
-{% block title %}
-    <title>
-        ثبت نام بیزینس _ داشبورد
-    </title>
-{% endblock %}
-{% load static %}
-{% block customCss %}
-    <link rel="stylesheet" href="{% static 'css/sorchi_containers.css' %}?=7">
-    {#  <link rel="stylesheet" href="{% static 'css/bootstrap.rtl.min.css' %}">#}
-    <link rel="stylesheet" href="{% static 'css/business-form.css' %}?=11">
-    <link rel="stylesheet" href="{% static 'css/business_signUp.css' %}?=7">
-    <link rel="stylesheet" href="{% static 'css/sorchi_btn.css' %}?=4">
-{% endblock %}
-{% block content %}
-    <div class="explanation-box">
-        <h3 class="bg-gradient-primary">{{ user.name }} عزیز خوش آمدید 😊</h3>
-        <!-- <p>اولین مرحله برای ساخت بازی وارد کردن اطلاعات کسب و کارتان است ، اطلاعات مشخص شده با آیکن آبی داخل بازی به
-            کاربر شما نمایش داده خواهد شد و تنها یکبار لازم است که آنها را وارد کنید.</p> -->
-            <p>اولین مرحله از ساخت بازی اینه که اسم کسب و کاری که می خوای براش بازی بسازی و بنویسی</p>
-    </div>
-    <div class="business_signUp_box col-md-12">
-        <form action="{% url 'account:signupBusiness' %}" method="post" enctype="multipart/form-data">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="b_name" class="form-label">نام کسب و کار *</label>
-                    <input type="text" class="form-control simple_text_dark_input" name="B_name" id="b_name" required>
-                </div>
-                <!-- <div class="mb-3">
-                    <label for="shop_address" class="form-label">آدرس کسب و کار
-                        <div class="info-icon" data-toggle="tooltip" data-placement="left"
-                             title="این آدرس در سورلینک به کاربران شما نشان داده خواهد شد.">
-                            <span class="info-icon-text">i</span>
-                        </div>
-                    </label>
-                    <input type="text" class="form-control simple_text_dark_input" name="shop_address"
-                           id="shop_address">
-                </div>
-                <div class="mb-3">
-                    <label for="web_address" class="form-label">آدرس وب سایت
-                        <div class="info-icon" data-toggle="tooltip" data-placement="left"
-                             title="این آدرس در سورلینک به کاربران شما نشان داده خواهد شد.">
-                            <span class="info-icon-text">i</span>
-                        </div>
-                    </label>
-                    <input type="text" class="form-control simple_text_dark_input" name="web_address" id="web_address">
-                </div>
-                <div class="mb-3">
-                    <label for="social_network" class="form-label">آدرس پیج / کانال شبکه اجتماعی
-                        <div class="info-icon" data-toggle="tooltip" data-placement="left" title="پیج شبکه اجتماعی">
-                            <span class="info-icon-text">i</span>
-                        </div>
-                    </label>
-                    <input type="text" class="form-control simple_text_dark_input" name="social_network"
-                           id="social_network">
-                </div>
-                <div class="mb-3">
-                    <div class="form-check">
-{#                        <div class=" form-checkbox">#}
-{#                            <input type="checkbox" class="form-check-input" name="online" id="online">#}
-{#                            <label class="form-check-label" for="online">فروش حضوری دارم</label>#}
-{#                        </div>#}
-{##}
-{#                        <div class=" form-checkbox">#}
-{#                            <input type="checkbox" class="form-check-input" name="ofline" id="ofline">#}
-{#                            <label class="form-check-label" for="ofline">فروش اینترنتی دارم</label>#}
-{#                        </div>#}
-
-                        <div class="checkbox-rect form-checkbox">
-                                <input type="checkbox" id="checkbox-rect1" name="check">
-                                <label for="checkbox-rect1">فروش حضوری دارم</label>
-                        </div>
-                        <div class="checkbox-rect form-checkbox">
-                            <input type="checkbox" id="checkbox-rect2" name="check1">
-                            <label for="checkbox-rect2">فروش اینترنتی دارم</label>
-                        </div>
-
-                    </div>
-                </div>
-                {#        <div class="mb-3">#}
-                {#          <label for="description" class="form-label">توضیحات#}
-                {#            <div class="info-icon" data-toggle="tooltip" data-placement="left" title="این توضیحات در قسمت سورلینک به کاربران شما نشان داده خواهد شد.">#}
-                {#              <span class="info-icon-text">i</span>#}
-                {#            </div>#}
-                {#          </label>#}
-                {#          <textarea class="form-control simple_text_dark_input" name="description" id="description" rows="5"></textarea>#}
-                {#        </div>#} -->
-            </div>
-            <!-- <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="nationalcode" class="form-label">کد اقتصادی / کد ملی *</label>
-                    <input type="text" class="form-control simple_text_dark_input" name="Nationalcode" id="nationalcode"
-                           required>
-                </div>
-                <div class="mb-3">
-                    <label for="B_phone" class="form-label">شماره تلفن کسب و کار*</label>
-                    <input type="text" class="form-control simple_text_dark_input" name="B_phone" id="B_phone" required>
-                </div>
-                <div class="mb-3">
-                    <label for="profile_image" class="form-label">لوگوی کسب و کار
-                        <div class="info-icon" data-toggle="tooltip" data-placement="left"
-                             title="لوگوی شما در سولینک و بازی‌هایی که می‌سازید نمایش داده می‌شود">
-                            <span class="info-icon-text">i</span>
-                        </div>
-                    </label>
-                    <input type="file" style="padding: 10px" class="form-control simple_text_dark_input"
-                           name="profile_image" accept="image/png, image/jpeg" id="profile_image">
-                </div>
-                <div class="mb-3">
-                    <label for="categories" class="form-label">دسته بندی کسب و کار*
-                        <div class="info-icon" data-toggle="tooltip" data-placement="left"
-                             title="با نگه داشتن کلید Ctrl  می‌توانید چند آیتم انتخاب کنید">
-                            <span class="info-icon-text">i</span>
-                        </div>
-                    </label>
-                    <select name="category" class="simple_text_dark_input" id="categories" multiple required>
-                        {% for i in categories %}
-                            <option value="{{ i.id }}">{{ i.Maincategory }}_{{ i.title }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-            </div> -->
-
-            {% csrf_token %}
-            <p class="edite-text">
-                برای تغییر این اطلاعات میتوانید به قسمت سورلینگ مراجعه کنید.
-            </p>
-            <input type="submit" value="ثبت کسب و کار"
-                   class="block px-6 py-2 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-gradient-to-tl from-blue-500 to-violet-700 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:-translate-y-px"
-                   style="width:70%;margin-right: 14%;color:#fff;">
-        </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Function to check if the device has touch support
-            function isTouchDevice() {
-                return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-            }
-
-            $('[data-toggle="tooltip"]').tooltip({
-                trigger: 'hover',
-                placement: 'left'
-            });
-
-            var isTouch = false; // Flag to track touch events
-
-            // Detect touch events and set the isTouch flag accordingly
-            if (isTouchDevice()) {
-                $(document).on('touchstart', function () {
-                    isTouch = true;
-                });
-
-                $(document).on('touchend', function () {
-                    isTouch = false;
-                });
-            }
-        });
-    </script>
-
-{% endblock %}
