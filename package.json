@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "tailwindcss -i tw/input.css -o src/static/css/base.css --watch"
+    "dev": "tailwindcss -i tw/input.css -o src/assets/css/base.css --watch"
   },
   "dependencies": {
     "package.json": "^2.0.1",

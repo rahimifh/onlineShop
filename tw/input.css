@@ -5,7 +5,7 @@
 /*--------------Added Fonts--------------*/
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Thin;
     font-style: normal;
     font-weight: 100;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Thin.woff),
@@ -13,7 +13,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_ExLight;
     font-style: normal;
     font-weight: 200;
     src: url(../fonts/Anjoman/woff/AnjomanMax-ExLight.woff),
@@ -21,7 +21,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Light;
     font-style: normal;
     font-weight: 300;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Light.woff),
@@ -29,7 +29,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Medium;
     font-style: normal;
     font-weight: 500;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Medium.woff),
@@ -45,7 +45,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_ExBold;
     font-style: normal;
     font-weight: 800;
     src: url(../fonts/Anjoman/woff/AnjomanMax-ExBold.woff),
@@ -53,7 +53,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Black;
     font-style: normal;
     font-weight: 900;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Black.woff),
@@ -61,7 +61,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Bold;
     font-style: normal;
     font-weight: bold;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Bold.woff),
@@ -69,7 +69,7 @@
 }
 
 @font-face {
-    font-family: AnjomanMax;
+    font-family: AnjomanMax_Regular;
     font-style: normal;
     font-weight: normal;
     src: url(../fonts/Anjoman/woff/AnjomanMax-Regular.woff),
@@ -92,286 +92,15 @@ body {
 
 
 @layer components {
-    .line-clamp-4 {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* glass effect */
-    .glassEffect {
-        @apply lg:backdrop-blur-[16px] lg:backdrop-saturate-[180%] lg:bg-[rgba(255,255,255,0)] lg:rounded-[12px] lg:border lg:border-[rgba(209,213,219,0.3)]
-    }
-
-    /*===== game landing themes =======*/
-    .phone-code-input {
-        @apply flex items-center justify-center text-center p-3 aspect-square rounded-xl;
-    }
-
-    .game_btn {
-        @apply relative inline-block bg-gray-200 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.3)] text-[#a0230f] font-bold text-2xl py-4 px-7 rounded-full focus:outline-none transition-all duration-300 ease-in-out hover:shadow-[rgba(255,255,255,0.2)_0px_3px_15px_inset,rgba(0,0,0,0.1)_0px_3px_5px,rgba(0,0,0,0.1)_0px_10px_13px] hover:scale-105;
-    }
-
-    .game_btn::after {
-        content: "";
-        position: absolute;
-        top: 10%;
-        left: 4%;
-        height: 50%;
-        width: 80%;
-        background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0) 100%);
-        border-radius: 125px;
-        opacity: 0.5;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .secondary_btn {
-        @apply relative inline-block shadow-[inset_0_-2px_4px_rgba(0,0,0,0.3)] text-white font-bold text-[18px] px-3 py-2 h-full rounded-lg focus:outline-none transition-all duration-300 ease-in-out hover:shadow-[rgba(255,255,255,0.2)_0px_3px_15px_inset,rgba(0,0,0,0.1)_0px_3px_5px,rgba(0,0,0,0.1)_0px_10px_13px] hover:scale-105;
-    }
-
-    .page-container::-webkit-scrollbar, .hideScroll::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* theme 6*/
-    .theme_6 {
-        @apply text-white bg-gradient-to-t from-[#c7417b] to-[#f5487f] ;
-    }
-
-    .theme_6 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-    .theme_6 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_6 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_6 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
 
 
-    .theme_6 .countdown {
-        color: red
-    }
-
-    /* theme 5*/
-    .theme_5 {
-        @apply text-white bg-gradient-to-t from-[#AAC4FF] to-[#B1B2FF] ;
-    }
-
-    .theme_5 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-    .theme_5 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_5 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_5 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
-
-
-    .theme_5 .countdown {
-        color: red
-    }
-
-
-    /* theme 4*/
-    .theme_4 {
-        @apply text-white bg-gradient-to-t from-[#55679C] to-[#7C93C3] ;
-    }
-
-    .theme_4 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-    .theme_4 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_4 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_4 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
-
-
-    .theme_4 .countdown {
-        color: red
-    }
-
-    /* theme 3*/
-    .theme_3 {
-        @apply text-white bg-gradient-to-t from-[#E3A5C7] to-[#B692C2] ;
-    }
-
-    .theme_3 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-    .theme_3 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_3 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_3 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
-
-
-    .theme_3 .countdown {
-        color: red
-    }
-
-    /* theme 2*/
-    .theme_2 {
-        @apply text-white bg-gradient-to-t from-[#E85C0D] to-[#FABC3F] ;
-    }
-
-    .theme_2 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-    .theme_2 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_2 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_2 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
-
-
-    .theme_2 .countdown {
-        color: red
-    }
-
-    /* theme 1*/
-    .theme_1 {
-        @apply text-white bg-gradient-to-t from-secondary-400 to-primary ;
-    }
-
-    .theme_1 .game-landing_btn {
-        @apply game_btn bg-gray-200;
-    }
-
-
-    .theme_1 .sendCode_btn {
-        @apply secondary_btn bg-[#a0230f];
-    }
-
-    .theme_1 h1, .theme_1 h2 {
-        color: gold;
-    }
-
-    .theme_1 .secondaryTextColor {
-        color: #a0230f !important;
-    }
-
-    .theme_1 #tiles span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 20px;
-        position: relative;
-        color: red;
-    }
-
-
-    .theme_1 .countdown {
-        color: red
-    }
 
 
     .active-link {
-        @apply relative after:absolute after:inset-y-0 after:-right-8 after:w-1.5 after:bg-[#f6d658] after:rounded-full;
+        @apply bg-blue-300 w-32 h-12 rounded-sm flex justify-center items-center;
     }
-
-    .active-link i {
-        @apply text-[#f6d658];
-    }
-
-    .active-link span {
-        @apply text-slate-700;
-    }
-
-    .avatar {
-        @apply rounded-full w-14 mx-auto aspect-square shadow-md;
-    }
-
-    .light-input {
-        @apply border border-main text-black w-80 h-10 text-center flex justify-center items-center my-4 px-2 py-2 text-base;
-    }
-
-    .btn-primary-create {
-        @apply bg-main px-4 rounded-md text-xl text-btnblue font-bold min-w-[200px] h-14 text-center flex justify-center items-center hover:bg-btnblue hover:text-main ;
-    }
-
-    .btn-primary-create-dis {
-        @apply bg-gray-500 px-4 cursor-default rounded-md text-xl text-white font-bold min-w-[200px] h-14 text-center flex justify-center items-center;
+    .link {
+        @apply bg-blue-100 w-32 h-12 rounded-sm flex justify-center items-center;
     }
 }
 
@@ -392,102 +121,7 @@ body {
     }
 }
 
-@layer components {
-    .button {
-        @apply appearance-none border border-transparent rounded-[16px] border-b-4 border-b-transparent box-border text-white cursor-pointer inline-block font-bold text-sm tracking-wide leading-5 m-0 outline-none overflow-visible py-[13px] text-center uppercase touch-manipulation transform select-none align-middle whitespace-nowrap relative before:content-[''] before:border before:border-transparent before:rounded-[16px] before:border-b-4 before:absolute before:inset-0 before:z-[-1] hover:filter hover:brightness-110 disabled:cursor-auto active:border-t-4 active:border-b-0 active:bg-transparent;
-    }
 
-    .customShadow {
-        @apply shadow-[0_12px_40px_rgba(0,0,0,.25)]
-    }
 
-    .box-deck {
-        @apply gap-6 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 grid;
-    }
 
-    .box {
-        @apply shadow-lg rounded-3xl bg-white max-w-md mx-auto w-full;
-    }
 
-    /* btn */
-    .new-btn {
-        @apply w-35 h-11 font-persianRegular text-[#000] bg-[#fff] border-none rounded-12 ;
-    }
-
-    .btn {
-        @apply px-4 py-3 md:py-5 md:px-12 rounded-full  shadow-md hover:scale-105 active:scale-100 transition-transform;
-    }
-
-    .btnR {
-        @apply px-5  py-2 rounded-xl shadow-md hover:scale-105 active:scale-100 transition-transform md:py-3 md:px-2;
-    }
-
-    .btn-primary {
-        @apply bg-gradient-to-tl from-[#a100ff] to-blue-500 text-white hover:bg-[#c76dfc] hover:text-amber-50 hover:shadow-black transition-transform;
-    }
-
-    .btn-primary1 {
-        @apply bg-gradient-to-tl from-[#7CB9F1] to-blue-500 text-white hover:bg-[#c76dfc] hover:text-amber-50 hover:shadow-black transition-transform;
-    }
-
-    .btn-secondry {
-        @apply bg-[#AF19EF] text-white hover:bg-[#4B7BC4FF] hover:shadow-black;
-    }
-
-    .btn-blure {
-        @apply bg-white/30 backdrop-blur-lg;
-    }
-
-    .btn-lg {
-        @apply rounded-xl text-lg px-8;
-    }
-
-    /* shadow */
-    .bg-y-shadow-md {
-        @apply bg-gradient-to-b from-black/40 via-black/0 to-black/40;
-    }
-
-    .bg-y-shadow-md {
-        @apply bg-gradient-to-b from-black/60 via-black/0 to-black/60;
-    }
-
-    .bg-y-shadow-lg {
-        @apply bg-gradient-to-b from-black/80 via-black/0 to-black/80;
-    }
-
-    .popup {
-        @apply w-7 h-7 bg-main rounded-md flex items-center justify-center mx-2
-    }
-
-    .popupbtn {
-        @apply bg-white w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-red-900 my-2
-    }
-
-}
-
-.linear-background {
-    background-image: linear-gradient(145deg, rgba(70, 65, 65, 0) 30%, rgba(181, 217, 250, 0.65) 100%, rgba(47, 35, 35, 0) 100%);
-}
-
-.linear-bg {
-    background-image: linear-gradient(-45deg, rgba(70, 65, 65, 0) 30%, rgba(54, 79, 101, 0.21) 100%, rgba(173, 127, 127, 0) 100%);
-}
-
-.btn-shadow {
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
-
-.btn-prevShadow {
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-}
-
-.box-shadow {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-}
-
-.price-linear {
-    background-image: linear-gradient(145deg, rgba(70, 65, 65, 0) 30%, rgba(2, 132, 248, 0.65) 100%, rgba(47, 35, 35, 0) 100%);
-    padding: 5px;
-    border-radius: 16px;
-    width: 200px;
-}

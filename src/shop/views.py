@@ -4,10 +4,18 @@ from cart.forms import CartAddProductForm
 from .models import Category, Product
 # from .recommender import Recommender
 
-
+def home(request):
+    products = Product.objects.filter(available=True)[:3]
+    return render(
+        request,
+        'shop/product/home.html',
+        {
+            'products': products,
+        },)
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
+
     products = Product.objects.filter(available=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)

@@ -57,7 +57,16 @@ module.exports = {
                     from: {transform: 'translateX(0)'}, to: {transform: 'translateX(-100%)'},
                 }
             }, fontFamily: {
-                persianRegular: ["vazirMatnRegular"], persianBold: ["vazirMatnBold"],
+                AnjomanMax_Thin: ["AnjomanMax-Thin"], 
+                AnjomanMax_ExLight: ["AnjomanMax_ExLight"],
+                AnjomanMax_Light: ["AnjomanMax_Light"],
+                AnjomanMax_Medium: ["AnjomanMax-Medium"],
+                AnjomanMax_SemiBold: ["AnjomanMax_SemiBold"],
+                AnjomanMax_ExBold: ["AnjomanMax_ExBold"],
+                AnjomanMax_ExBold: ["AnjomanMax_ExBold"],
+                AnjomanMax_Black: ["AnjomanMax_Black"],
+                AnjomanMax_Bold: ["AnjomanMax_Bold"],
+                AnjomanMax_Regular: ["AnjomanMax_Regular"],
             }, container: {
                 center: true,
             },
