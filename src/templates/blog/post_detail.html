@@ -1,0 +1,224 @@
+{% extends 'blog/post_base.html' %}
+{% load jalali_tags %}
+
+{% block title %} مجله سورچی | {{ post.title | truncatewords:10}} {% endblock title %}
+{% block customCss %}
+    <meta name="description" content="{{ post.summary }}">
+    <meta name="keywords" content="{% for tag in tags %} {{ tag.name }}, {% endfor %}">
+{% endblock customCss %}
+{% block content %}
+
+    <!-- ======= Blog Page ======= -->
+    <div class="w-full flex flex-col gap-5">
+        <article>
+            <div class="w-full">
+                {% if post.post_image %}
+                    <img class="w-full rounded-xl mb-4" src="{{ post.post_image.url }}"
+                         alt="post-pic">
+                {% endif %}
+            </div>
+            <div class="bg-white shadow rounded-xl p-5 flex flex-col gap-4">
+                <h2 class="font-bold text-center text-xl md:text-2xl">{{ post.title }}</h2>
+                <div class="entry-meta w-full md:w-[90%] xl:w-[70%] mx-auto border rounded-xl flex items-center justify-center text-center text-xs md:text-sm lg:text-base text-nowrap p-3 gap-5">
+                    <button id='like-button'
+                            class="flex gap-1 justify-center items-center text-center">
+                        <div id='like-symbol'>
+                        <i class="fa-solid fa-heart text-gray-600"></i>
+                        </div>
+                        <div class="mb-1" id='like-number'></div>
+                    </button>
+                    <span class="flex justify-center items-center text-center gap-1"><ion-icon
+                            name="calendar-outline"></ion-icon> <i
+                    >{{ post.JaliliDatepublished }}</i> </span>
+                    <span class="flex justify-center items-center text-center gap-1">
+                      {% if post.tag %}
+                          <ion-icon name="bookmark-outline"></ion-icon>
+                          <a
+                                  href="{% url 'blog:post-list' %}?tag={{ post.tag.id }}">{{ post.tag.name }}</a>
+                      {% endif %}
+                    </span>
+                    <span class="flex justify-center items-center text-center gap-1"><ion-icon
+                            name="chatbubble-ellipses-outline"></ion-icon> <a
+                            href="#single-post-comments">{{ post.confirmed_comments.count }} نظر</a></span>
+                </div>
+
+                <div class="text-center px-4 mb-2 mt-2">
+                    {{ post.text|safe }}
+                </div>
+            </div>
+        </article>
+
+        {# Comments section #}
+        <div class="w-full bg-white shadow rounded-xl p-5 flex flex-col gap-5">
+            <form method="post" class="flex flex-col gap-3" action="{% url 'blog:add-comment' post_id=post.id %}">
+                {% csrf_token %}
+                <h3 class="font-medium text-xl"> نظر خود را ثبت کنید. </h3>
+                {% if request.user.is_authenticated %}
+                    <input hidden type="text" id="comment_content" name="{{ comment_form.user.name }}"
+                           value="{{ request.user.username }}" required>
+                {% else %}
+                    <input class="w-1/2 rounded-xl border p-3" type="text"
+                           id="comment_content" name="{{ comment_form.user.name }}" placeholder="نام"
+                           required>
+                {% endif %}
+
+                <input class="w-full rounded-xl border p-3"
+                       type="text"
+                       id="comment_content" name="{{ comment_form.text.name }}"
+                       placeholder="دیدگاه خودتان را بنویسید . . ."
+                       required>
+
+                <button class="button bg-secondary before:bg-secondary-400"
+                        type="submit">ثبت دیدگاه
+                </button>
+            </form>
+            {#     List of comments       #}
+            <div id="single-post-comments" class="bg-white flex flex-col gap-3">
+                <div class="relative h-fit w-full mt-3">
+                    <h3 class="relative z-[5] w-fit mx-auto bg-white px-5 p-2 font-medium text-xl flex gap-2 items-center justify-center"
+                    >نظرات کاربران
+                    </h3>
+                    <div class="absolute w-full bg-gray-300" style="height: 1px; top:1.2rem;"></div>
+                </div>
+
+                <div class="comments-area">
+                    <div class="comments-heading">
+                        {{ comment.count }}
+                    </div>
+                    <div class="comments-list">
+                        <ul class="flex flex-col mb-5 gap-3 items-end">
+                            {% for comment in comments %}
+                                <li class="{% if comment.is_reply %} w-[90%] bg-green-50 {% else %} w-full {% endif %} rounded-lg border p-5">
+                                    <div class="comments-details">
+                                        {#   comment header     #}
+                                        <div class="flex justify-between items-start text-sm">
+                                            {% if comment.is_reply %}
+                                                <h6 class="text-primary">در پاسخ به {{ comment.user }}</h6>
+                                            {% else %}
+                                                <h6 class="text-primary">{{ comment.user }}</h6>
+                                            {% endif %}
+                                            <span class="text-xs text-gray-600">{{ comment.date_created|to_jalali:'%y/%m/%d %H:%M' }}</span>
+                                        </div>
+                                        <p style="font-size: 15px;margin: 0">{{ comment.text }}</p>
+                                        {% if request.user == comment.user or request.user.is_superuser %}
+                                            <form method="post"
+                                                  action="{% url 'blog:delete-comment' comment.id %}">
+                                                {% csrf_token %}
+                                                <button style="padding: 1px;margin-left: 300px"
+                                                        class="btn p-1 w-16 bg-red-200 m-2" type="submit">
+                                                    حذف
+                                                </button>
+                                            </form>
+                                        {% endif %}
+
+                                        {% if request.user.is_superuser %}
+                                            <form method="post"
+                                                  action="{% url 'blog:add-reply' post_id=post.id comment_id=comment.id %}">
+                                                {% csrf_token %}
+                                                <input hidden type="text" id="comment_content"
+                                                       name="{{ comment_form.user.name }}"
+                                                       value="{{ request.user.username }}" required>
+                                                <label for="comment_content">پاسخ:</label>
+                                                <input type="text" id="comment_content"
+                                                       name="{{ comment_form.text.name }}" placeholder=""
+                                                       required>
+                                                <button style="padding: 1px;margin-left: 300px"
+                                                        class="btn p-1 w-24 bg-green-200 m-2" type="submit">
+                                                    پاسخ دادن
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                                {% empty %}
+                                <h4 class="text-center text-gray-600 w-full">شما اولین نفری باشید که نظر خود را ثبت میکند!</h4>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End Blog Page -->
+
+{% endblock content %}
+{% block customjs %}
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            let like_number = {{ post.likes.count }}
+
+            function setLikeNumber() {
+                {% if request.user.is_superuser %} $('#like-number').html(like_number); {% endif %}
+            }
+
+            setLikeNumber()
+            let like_stat = '{{is_liked}}';
+
+            $('#like-button').on('click', () => {
+                console.log('i am clicked')
+
+                {% if user.is_authenticated %}
+                    $.ajax({
+                        url: '{% url "blog:like-post" post_id=post.id %}',
+                        type: 'POST',
+                        data: {
+                            csrfmiddlewaretoken: '{{csrf_token}}',
+                            like_stat: like_stat,
+                        },
+                        dataType: 'json',
+                        success: (response, textStatus, http) => {
+                            if (http.status === 200) {
+                                like_stat = response.like_stat;
+                                if (like_stat === true) {
+                                    $('#like-symbol').html('<i class="fa-solid fa-heart text-red-500"></i>');
+                                    like_number++;
+                                } else {
+                                    $('#like-symbol').html('<i class="fa-solid fa-heart text-gray-600"></i>');
+                                    like_number--;
+                                }
+                                setLikeNumber();
+                            }
+                        },
+                        error: (xhr, status, error) => {
+                            console.log('error')
+                        }
+                    });
+                {% else %}
+                    // if user is not authenticated, when user clicks on like button shows an alert
+                    alert('لظفا وارد حساب کاربری خود شوید')
+                {% endif %}
+
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(() => {
+            var msg = $('.alert');  // Assuming you're using a class selector, not an ID
+            console.log(`msg is ${msg}`);
+
+            // Automatically dismiss the message after 30 seconds
+            setTimeout(() => {
+                console.log('in the delete');
+                msg.remove();
+            }, 10000);
+
+            // Dismiss the message on button click
+            msg.find('.btn-close').on('click', () => {
+                console.log('I am clicked');
+                msg.remove();
+            });
+        });
+    </script>
+
+
+{% endblock customjs %}

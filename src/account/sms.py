@@ -30,7 +30,7 @@ def smsSender(number, message, business=None):
         if business.SMS_number == 20:
             res = sms_ir.send_sms(
                 number=business.account.username,
-                message="پیامک شما در اپ ارسی رو به اتمام است برای مختل نشدن عملکرد کمپین خود آن را شارژ کنید",
+                message="پیامک شما در اپ   محصولات برنز خلیج فارس رو به اتمام است برای مختل نشدن عملکرد کمپین خود آن را شارژ کنید",
                 linenumber=SMS_LINE_NUMBER,
             )
         elif business.SMS_number == 0:

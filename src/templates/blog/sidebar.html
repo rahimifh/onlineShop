@@ -1,0 +1,106 @@
+{% load sidebar_tags %}
+{% load jalali_tags %}
+
+<!-- START sidebar -->
+<div class="rtl flex w-full lg:px-0 mx-auto flex-col lg:w-1/3 mb-10">
+    <div class="page-head-blog">
+        <div class="w-full h-12 mt-4 xlg:mt-0">
+            <!-- START search option -->
+            <form method="get" action="{% url 'blog:post-list' %}">
+
+                <div dir="rtl" class="w-full flex justify-center items-center gap-2">
+                    <input type="search"
+                           class="w-3/4 h-8 p-[17px] rounded-lg my-auto placeholder:opacity-50 bg-white shadow border-spacing-2 border"
+                           placeholder="جستجو ..." name="search-area" value="{{ search_input }}" aria-label="Search"
+                           aria-describedby="search-addon"/>
+                    <button type="submit" class="w-8 h-8 flex items-center justify-center bg-white shadow border-spacing-2 border rounded-lg">
+                        <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                    </button>
+                </div>
+            </form>
+            <!-- END search option -->
+        </div>
+
+        <div dir="rtl" class="bg-white shadow mx-2 my-1 rounded-lg p-2">
+            <!-- recent start -->
+            <div class="w-full">
+                <h4 class="mb-4 py-3 font-bold  border-b text-center ">جدیدترین پست ها</h4>
+                {% get_top_posts as top_posts %}
+                {% if top_posts %}
+                    {% for post in top_posts %}
+                        <div class="my-4 bg-white border border-gray-400 hover:shadow-2xl transition duration-700 ease-in-out"
+                             style="border-radius: 12px">
+                            <div class="border-b-slate-100">
+
+                                <div class="post-img">
+                                    <a class="w-full flex justify-center items-center"
+                                       href="{{ post.get_absolute_url }}">
+                                        {% if post.post_image %}
+                                            <img class="w-full rounded-t-lg"
+                                                 src="{{ post.post_image.url }}" alt="post-img">
+                                        {% else %}
+                                            <span>بدون تصویر</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class=" font-bold mb-2 p-2">
+                                    <p class="text-center"><a class="text-[12px]"
+                                                              href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <!-- recent end -->
+        </div>
+
+        <div dir="rtl" class="bg-white shadow mx-2 my-1 rounded-lg p-2">
+            <div class=" p-2 text-lg">
+                <h4 class="mb-4 font-bold  border-b text-center">دسته بندی</h4>
+                <ul class="flex-col justify-center items-center">
+                    {% get_categories as categories %}
+                    {% if categories %}
+                        {% for category in categories %}
+                            <li class="w-full mb-2"><a
+                                    class="block w-full text-[14px] bg-slate-50 pr-3 rounded-lg hover:bg-slate-300  transition duration-700 ease-in-out "
+                                    href="{% url 'blog:post-list' %}?category={{ category.id }}">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div dir="rtl" class="bg-white shadow mx-2 my-1 rounded-lg p-2">
+            <div class=" p-2 text-lg">
+                <h4 class="mb-4 font-bold  border-b text-center">تگ ها</h4>
+                {% get_tags as tags %}
+                {% if tags %}
+                    {% for tag in tags %}
+                        <a class="border border-gray-900 rounded-2xl bg-slate-50 p-1  text-[10px] hover:bg-slate-300  transition duration-700 ease-in-out"
+                           href="{% url 'blog:post-list' %}?tag={{ tag.id }}">{{ tag.name }}</a>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div dir="rtl" class="bg-white shadow mx-2 my-1 rounded-lg p-2">
+            <div class=" p-2 text-lg">
+                <h4 class="mb-4 font-bold  border-b text-center">آرشیو</h4>
+                <ul class="flex-col justify-center items-center">
+                    {% get_archive_dates as archive_dates %}
+                    {% for archive in archive_dates %}
+                        <li class="w-full"><a
+                                class="block w-full bg-slate-50 pr-3  text-[14px] rounded-lg hover:bg-slate-300  transition duration-700 ease-in-out "
+                                href="{% url 'blog:post-list' %}?archive={{ archive|date:'Y-m-d' }}">
+                            {{ archive | to_jalali:'%y/%m' }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END sidebar -->

@@ -5,12 +5,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}My shop{% endblock %}</title>
-  <link href="{% static 'css/base.css' %}?v=6" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="{% static 'css/base.css' %}?v=9" rel="stylesheet">
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
   {% include 'shop/components/_header.html' %}
   {% block content %}
   {% endblock %}
 {% include 'shop/components/_footer.html' %}
+
+<script>
+  // JavaScript to toggle responsive menu
+
+  const navLinks = document.querySelector('.nav-links')
+
+  function onToggleMenu(e) {
+      e.name = e.name === 'menu' ? 'close' : 'menu'
+      navLinks.classList.toggle('')
+  }
+
+
+  // JavaScript to change navbar color on scroll
+  window.addEventListener('DOMContentLoaded', function () {
+      let header = document.querySelector('.header');
+      let headerHeight = header.offsetHeight;
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', function () {
+          let currentScroll = window.scrollY;
+
+          if (currentScroll > headerHeight) {
+              if (currentScroll > lastScroll) {
+                  header.classList.remove('sticky');
+              } else {
+                  header.classList.add('sticky');
+              }
+          } else {
+              header.classList.remove('sticky');
+          }
+
+          if (currentScroll === 0) {
+              header.classList.remove('sticky');
+          }
+
+          lastScroll = currentScroll;
+      });
+  });
+
+
+  function toggleMessage(id) {
+
+      var message = document.getElementById(id);
+      if (message.style.height === "0px") {
+          message.style.height = message.scrollHeight + "px";
+      } else {
+          message.style.height = "0px";
+      }
+  }
+
+
+  //javaScript for slider
+  var currentSlide = 0;
+  var slides = document.querySelectorAll('.slider input');
+
+  function showSlide(n) {
+      slides[currentSlide].checked = false;
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].checked = true;
+  }
+
+  function prevSlide() {
+      showSlide(currentSlide - 1);
+  }
+
+  function nextSlide() {
+      showSlide(currentSlide + 1);
+  }
+
+  // Add event listener to reset slide index when an image is clicked
+  var images = document.querySelectorAll('.slider img');
+  images.forEach(function (image, index) {
+      image.addEventListener('click', function () {
+          showSlide(index);
+      });
+  });
+
+  // Show the first slide initially
+  showSlide(0);
+
+  // Automatically change slide every 3 seconds
+  setInterval(function () {
+      nextSlide();
+  }, 3000);
+
+  //more button
+  document.addEventListener("DOMContentLoaded", function () {
+      var cards = document.querySelectorAll('.card-container .card');
+      var cardCount = cards.length;
+      var showCount = 4;
+
+      for (var i = showCount; i < cardCount; i++) {
+          cards[i].classList.add('hide');
+      }
+
+      document.getElementById('view-more').addEventListener('click', function () {
+          for (var i = showCount; i < cardCount; i++) {
+              cards[i].classList.toggle('hide');
+          }
+
+          this.textContent = (this.textContent === "نمایش بیشتر") ? "مخفی کردن" : "نمایش بیشتر";
+      });
+  });
+
+</script>
 </body>
 </html>

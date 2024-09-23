@@ -1,0 +1,67 @@
+{% load static %}
+{% load jalali_tags %}
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="title" content="آخرین اطلاعات و اخبار روز بازاریابی تبلیغات و راه انداری کمپین">
+    {% block custumemeta %}
+
+
+    {% endblock %}
+    <meta name="author" content="Siavash Rahimi">
+    <meta name="robots" content="index, follow">
+    <title>{% block title %}مجله   محصولات برنز خلیج فارس{% endblock title %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'blog/images/blog-favicon.png' %}"/>
+    {% block customCss %}
+    {% endblock customCss %}
+    <link href="{% static 'css/base.css' %}?v=8" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+
+<body class="bg-[#F1F5F9]">
+<!-- ======= Blog Header ======= -->
+{% include 'shop/components/_header.html' %}
+
+    <!-- ======= Blog Page ======= -->
+<main class="min-h-screen w-full max-w-7xl mx-auto flex flex-col gap-5 mt-20 p-5">
+    <img class="hidden md:block m-0 w-full relative rounded-xl" src="{% static 'blog/images/back.png' %}"
+         alt="لوستر ">
+    <img class="m-0 w-full md:hidden relative rounded-xl" src="{% static 'blog/images/mobile-banner-blog.png' %}"
+         alt="لوستر">
+    <div class="flex flex-col lg:flex-row gap-5">
+        {% include 'blog/sidebar.html' %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+</main>
+
+<!-- ======= Blog Footer ======= -->
+{% include 'shop/components/_footer.html' %}
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    var checker = false;
+
+    function menu_opener() {
+        var menu = document.getElementById("mobile_menu");
+        if (checker == false) {
+            menu.style.display = "block";
+            checker = true;
+        } else {
+            menu.style.display = "none";
+            checker = false;
+
+        }
+    }
+</script>
+{% block customjs %}
+{% endblock customjs %}
+</body>
+</html>

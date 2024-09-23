@@ -56,15 +56,17 @@
              class="hidden lg:block lg:flex-row w-full bg-transparent justify-center items-center lg:justify-between">
             <div class="w-full items-center">
                 <ul class="w-full text-base flex gap-4">
-    
+                    <li><a class="hover:text-primary transition-all font-medium nav-link"
+                        href="{% url 'shop:home' %}">
+                     <i class="fas fa-home"></i> خانه </a></li>
                     |
                     <li><a class="hover:text-primary transition-all font-medium nav-link"
                            href="#">
                         <i class="fas fa-info-circle"></i> درباره ما</a></li>
                     |
                     <li><a class="hover:text-primary transition-all font-medium nav-link"
-                           href="#">
-                        <i class="fas fa-book"></i> مجله ارسی</a></li>
+                           href="{% url 'blog:post-list' %}">
+                        <i class="fas fa-book"></i> مجله   محصولات برنز خلیج فارس</a></li>
                 </ul>
             </div>
         </nav>
@@ -73,14 +75,16 @@
             <div class="cart">
                 {% with total_items=cart|length %}
                   {% if total_items > 0 %}
-                    <img src="{% static 'img/top_logo.png' %}" 
-                        class="w-full object-contain rounded-xl animate-wiggle hover:animate-spin  animate-infinite animate-ease-in-out transition-all h-[40px] lg:h-[50px]"
-                    <a class="overflow-visible" href="{% url "cart:cart_detail" %}">
-                      {{ total_items }} item{{ total_items|pluralize }},
-                      T{{ cart.get_total_price }}
+                  <a class="relative" href="{% url 'cart:cart_detail' %}">
+                    <img src="{% static 'img/logo.png' %}" 
+                        class="w-full object-contain rounded-xl animate-wiggle hover:animate-spin  animate-infinite animate-ease-in-out transition-all h-[40px] lg:h-[50px] -z-10">
+                 
+                    
+                      <p class="absolute size-7 flex justify-center items-center rounded-full bg-red-700 text-white font-AnjomanMax_Black -mt-5 -mr-4 z-20">{{ total_items }}</p>
+                     
                     </a>
                   {% elif not order %}
-                  <img src="{% static 'img/top_logo.png' %}" onclick="alert('سبد شما خالی است')"
+                  <img src="{% static 'img/logo.png' %}" onclick="alert('سبد شما خالی است')"
                         class="w-full object-contain rounded-xl animate-wiggle hover:animate-spin  animate-infinite animate-ease-in-out transition-all h-[40px] lg:h-[50px]"
                     
                   alt="logo">
@@ -117,10 +121,12 @@
             </div>
 
             <ul class="gap-12 flex flex-col justify-start items-start h-[70vh] mt-5 overflow-y-auto">
+                <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'shop:product_list' %}"><i
+                        class="fas fa-home"></i> خانه </a></li>
                 <li><a class="hover:text-primary transition-all font-medium nav-link" href="#"><i
                         class="fas fa-info-circle"></i> درباره ما</a></li>
-                <li><a class="hover:text-primary transition-all font-medium nav-link" href="#"><i
-                        class="fas fa-book"></i> مجله ارسی</a></li>
+                <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'blog:post-list' %}"><i
+                        class="fas fa-book"></i> مجله   محصولات برنز خلیج فارس</a></li>
             </ul>
 
 
