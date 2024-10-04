@@ -9,8 +9,8 @@ from django.conf import settings
 from sms_ir import SmsIr
 
 
-SMS_API_KEY = os.environ.get('SMS_API_KEY')
-SMS_LINE_NUMBER = os.environ.get('SMS_LINE_NUMBER')
+SMS_API_KEY = "wZYwHS1oPJTV5pJ8SJUkdfrZf7Vh2iFzFN84sdUPc9bjE4s8fE6BN8k0KzNm4e1Y"
+SMS_LINE_NUMBER = "30007487130094"
 
 def smsSender(number, message, business=None):
     sms_ir = SmsIr(
