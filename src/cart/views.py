@@ -1,15 +1,16 @@
 from coupons.forms import CouponApplyForm
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from shop.models import Product
 # from shop.recommender import Recommender
 
 from .cart import Cart
 from .forms import CartAddProductForm
 
-
-@require_POST
+@login_required(login_url="account:login")
 def cart_add(request, product_id):
+
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     form = CartAddProductForm(request.POST)
@@ -32,6 +33,7 @@ def cart_remove(request, product_id):
 
 
 def cart_detail(request):
+
     cart = Cart(request)
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(

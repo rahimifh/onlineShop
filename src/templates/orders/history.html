@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+تاریخچه
+{% endblock %}
+
+{% block content %}
+    <div class="w-full pt-40 min-h-screen bg-blue-100">
+        {% for i in orders %}
+        <h1>{{i.phone}} </h1>
+        {% endfor %}
+    </div>
+
+{% endblock %}

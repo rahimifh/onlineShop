@@ -12,22 +12,22 @@ class PersonDetailForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonDetailForm, self).__init__(*args, **kwargs)
         self.user = kwargs.pop("user", None)  # getting kwargs
-        self.fields["firstName"].widget.attrs.update(
+        self.fields["first_name"].widget.attrs.update(
             {"class": "px-4 my-4 w-full h-12 rounded-xl border-gray-100 bg-slate-100"}
         )
-        self.fields["email"].widget.attrs.update(
+        self.fields["last_name"].widget.attrs.update(
             {"class": "px-4 my-4 w-full h-12 rounded-xl border-gray-100 bg-slate-100"}
-        )
+        )     
         self.fields["password"].widget.attrs.update(
             {"class": "px-4 my-4 w-full h-12 rounded-xl border-gray-100 bg-slate-100"}
         )
 
     class Meta:
         model = Account
-        fields = ("firstName", "email", "password")
+        fields = ("first_name","last_name", "password")
         labels = {
-            "firstName": "نام و نام خانوادگی ",
-            "email": "ایمیل ",
+            "first_name": "نام",
+            "last_name": "نام خانوادگی",
             "username": "شماره همراه",
             "password": "رمز عبور",
         }
@@ -64,16 +64,14 @@ class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = (
-            "firstName",
-            "username",
+            "first_name",
+            "last_name",
             "phone",
             "country",
             "city",
             "email",
             "birthday",
             "gender",
-            "education",
-            "social_media",
             "address",
             "profile_image",
         )

@@ -93,14 +93,37 @@ body {
 
 @layer components {
 
-
-
+    .button {
+        @apply appearance-none border border-transparent rounded-[16px] border-b-4 border-b-transparent box-border text-white cursor-pointer inline-block font-bold text-sm tracking-wide leading-5 m-0 outline-none overflow-visible py-[13px] text-center uppercase touch-manipulation transform select-none align-middle whitespace-nowrap relative before:content-[''] before:border before:border-transparent before:rounded-[16px] before:border-b-4 before:absolute before:inset-0 before:z-[-1] hover:filter hover:brightness-110 disabled:cursor-auto active:border-t-4 active:border-b-0 active:bg-transparent;
+    }
+    .codeinput{
+        @apply rounded-md mx-2
+    }
+    .form-control{
+        @apply border-2 border-gray-300 rounded-lg  h-12 w-full focus:bg-blue-100
+    }
+    .succes_btn{
+        @apply bg-green-300 rounded-md shadow shadow-green-500
+    }
+    
+    .primary_btn{
+        @apply bg-blue-300 rounded-md shadow shadow-blue-500
+    }
 
     .active-link {
-        @apply bg-blue-300 w-32 h-12 rounded-sm flex justify-center items-center;
+        @apply bg-blue-300 px-2 h-12 rounded-sm flex justify-center items-center shadow-inner shadow-blue-100;
     }
     .link {
-        @apply bg-blue-100 w-32 h-12 rounded-sm flex justify-center items-center;
+        @apply bg-blue-100 px-2 h-12 rounded-sm flex justify-center items-center shadow-inner shadow-blue-200;
+    }
+    .productBox{
+        @apply flex flex-wrap gap-2
+    }
+    .productImg{
+        @apply border border-gray-800 rounded-md shadow shadow-gray-400 w-44 lg:w-96 hover:absolute hover:w-[600px] hover:bg-white
+    }
+    .productDetail{
+        @apply bg-gray-100 w-44 p-2 lg:w-96
     }
 }
 

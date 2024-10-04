@@ -1,16 +1,23 @@
 import weasyprint
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles import finders
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-
+from django.contrib.auth.decorators import login_required
+from account.models import Account
 from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from .tasks import order_created
 
+def history(request):
+    user = request.user
+    user_orders = Order.objects.filter(user = user)
+    return render(request,'orders/history.html',{"orders":user_orders})
 
+@login_required(login_url="account:login")
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -20,7 +27,9 @@ def order_create(request):
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
+            order.user = request.user
             order.save()
+
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
@@ -37,7 +46,8 @@ def order_create(request):
             # redirect for payment
             return redirect('payment:process')
     else:
-        form = OrderCreateForm()
+        
+        form = OrderCreateForm(instance=request.user)
     return render(
         request,
         'orders/order/create.html',

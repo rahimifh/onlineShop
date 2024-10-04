@@ -1,32 +1,35 @@
 {% extends "shop/base.html" %}
 
 {% block title %}
-  Checkout
+تسویه حساب
 {% endblock %}
 
 {% block content %}
-  <h1>Checkout</h1>
-  <div class="order-info">
-    <h3>Your order</h3>
+<div class="w-full pt-20 min-h-screen">
+  <h1>تسویه حساب</h1>
+  <div class="order-info border-4 p-4  border-collapse m-4">
+    <h3 class="font-AnjomanMax_Bold text-3xl">سفارش شما</h3>
     <ul>
       {% for item in cart %}
-        <li>
-          {{ item.quantity }}x {{ item.product.name }}
-          <span>T{{ item.total_price|floatformat:2 }}</span>
+        <li class="p-2 bg-blue-200 rounded-sm">
+          {{ item.quantity }} عدد {{ item.product.name }}
+          <span>{{ item.total_price  }} تومان</span>
         </li>
       {% endfor %}
       {% if cart.coupon %}
         <li>
           "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
-          <span class="neg">- T{{ cart.get_discount|floatformat:2 }}</span>
+          <span class="neg">- {{ cart.get_discount  }} تومان</span>
         </li>
       {% endif %}
     </ul>
-    <p>Total: T{{ cart.get_total_price_after_discount|floatformat:2 }}</p>
+    <p class="font-AnjomanMax_Bold my-4">جمع کل: <span class="text-green-800">{{ cart.get_total_price_after_discount  }}</span> تومان</p>
   </div>
-  <form method="post" class="order-form">
+  <form method="post" class="order-form space-y-4 m-4">
     {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
+    <p><input class="succes_btn m-4 w-52 p-2  font-AnjomanMax_bold text-2xl" type="submit" value="پرداخت"></p>
     {% csrf_token %}
   </form>
+</div>
+
 {% endblock %}

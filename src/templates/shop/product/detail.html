@@ -5,37 +5,78 @@
   {{ product.name }}
 {% endblock %}
 {% block content %}
-  <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}
-    {% static "img/no_image.png" %}{% endif %}">
-    <h1>{{ product.name }}</h1>
-    <h2>
-      <a href="{{ product.category.get_absolute_url }}">
-        {{ product.category }}
-      </a>
-    </h2>
-    <p class="price">T{{ product.price }}</p>
-    <form action="{% url "cart:cart_add" product.id %}" method="post">
+  <div class="w-full mt-20  lg:px-10 lg:flex lg:justify-evenly lg:min-h-screen"> 
+    <div class="w-11/12 mx-auto m-2 lg:w-2/5 lg:px-20 lg:size-[500px] overflow-hidden border border-gray-500 rounded-md">
+      <img class="w-full mx-auto lg:size-[500px] lg:hover:size-[550px]" src="{% if product.image %}{{ product.image.url }}{% else %}
+      {%  static 'img/no_image.png' %}{% endif %}">
+    </div>
+<div class="lg:w-1/2">
+  <h1 class="font-AnjomanMax_ExBold text-xl">{{ product.name }}</h1>
+  <i class="fa-solid fa-star text-yellow-300"></i>
+  <i class="fa-solid fa-star text-yellow-300"></i>
+  <i class="fa-solid fa-star text-yellow-300"></i>
+  <i class="fa-solid fa-star text-yellow-300"></i>
+  <i class="fa-solid fa-star text-yellow-300"></i>
+  <hr>
+
+  <p class="font-AnjomanMax_ExBold text-green-600 my-2">{{ product.price }} تومان</p>
+  <div class="w-full flex justify-start">
+    <form class="w-1/2 flex justify-between items-center" action="{% url "cart:cart_add" product.id %}" method="post">
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" value="Add to cart">
+      <button class="button w-40 bg-green-200 flex justify-between items-center shadow-inner shadow-green-400 my-2 px-4 text-black lg:my-4" type="submit" > افزودن به سبد <img class="size-6" src="{% static 'img/cart.png' %}" alt=""></button>
     </form>
-    {{ product.description|linebreaks }}
+  </div>
 
-    {% if recommended_products %}
-      <div class="recommendations">
-        <h3>People who bought this also bought</h3>
-        {% for p in recommended_products %}
-          <div class="item">
-            <a href="{{ p.get_absolute_url }}">
-              <img src="{% if p.image %}{{ p.image.url }}{% else %}
-              {% static  "img/no_image.png" %}{% endif %}">
-            </a>
-            <p><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></p>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+<div class="mt-4">
+  <button id="desbtn1" onclick="win('description')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[18px]"> معرفی </button>
+  <button id="desbtn2"  onclick="win('Specifications')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[14px]"> مشخصات </button>
+  <hr>
+  <div id="description" class="text-justify w-full p-4">
+    {{ product.description|safe }}
+   </div>
+   <div id="Specifications" class="text-justify w-full p-4 hidden">
+    {{ product.Specifications|safe }}
+   </div>
+</div>
+
+ 
+    <div class="recommendations">
+
+   
+      <h2>
+        <a class="button bg-red-600 w-40 my-2" href="{{ product.category.get_absolute_url }}">
+          {{ product.category }}
+        </a>
+      </h2>
+    </div>
+
+</div>
+
 
   </div>
+{% endblock %}
+
+{% block customJs %}
+<script>
+  function win(variable) {
+    let description = document.getElementById('description');
+    let Specifications = document.getElementById('Specifications');
+    let desbtn1 = document.getElementById('desbtn1');
+    let desbtn2 = document.getElementById('desbtn2');
+    if (variable == "description") {
+
+      desbtn1.style.fontSize = "18px";
+      desbtn2.style.fontSize = "14px";
+      description.style.display = "block";
+      Specifications.style.display = "none";
+
+    }else if("Specifications"){
+      description.style.display = "none";
+      Specifications.style.display = "block";
+      desbtn1.style.fontSize = "14px";
+      desbtn2.style.fontSize = "18px";
+    }
+  }
+</script>
 {% endblock %}

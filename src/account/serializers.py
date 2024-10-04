@@ -10,7 +10,7 @@ class CostomerAccountSerializers(serializers.ModelSerializer):
             "id",
             "username",
             "name",
-            "last_Name",
+            "last_name",
             "email",
             "phone",
             "birthday",
@@ -27,7 +27,7 @@ class LeaderboardCostomerAccountSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ("id", "username", "name", "last_Name", "profile_image")
+        fields = ("id", "username", "name", "last_name", "profile_image")
 
 
 class AccountSerializers(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class AccountSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ("id", "username", "name", "last_Name", "email", "phone", "password")
+        fields = ("id", "username", "name", "last_name", "email", "phone", "password")
 
     def create(self, validated_data):
         user = super().create(validated_data)
@@ -54,7 +54,7 @@ class AccountReedSerializers(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
-            "last_Name",
+            "last_name",
             "username",
             "phone",
             "country",

@@ -11,20 +11,22 @@
 {% include 'shop/components/Hero.html' %}
 
 
-  <div id="main" class="w-full min-h-screen flex justify-center items-center ">
+  <div id="main" class="w-full min-h-screen flex justify-center items-start ">
     <div>
 
     <hr>
-    <h1><a class="link" href="{% url 'shop:product_list' %}">مشاهده همه</a></h1>
-    <div class="flex flex-wrap">
+    <h1><a class="link my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h1>
+    <div class="productBox">
     {% for product in products %}
-    <div class="item  m-2">
+    <div class="item  mx-auto lg:mx-2">
         <a href="{{ product.get_absolute_url }}">
-          <img class="border border-gray-800 w-96" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+          <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
         </a>
+        <div class="productDetail">
         <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
         <br>
-        T{{ product.price }}
+        {{ product.price }} تومان
+      </div>
       </div>
     {% endfor %}
   </div>

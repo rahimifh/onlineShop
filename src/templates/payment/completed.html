@@ -3,6 +3,9 @@
 {% block title %}Payment successful{% endblock %}
 
 {% block content %}
-  <h1>Your payment was successful</h1>
-  <p>Your payment has been processed successfully.</p>
+<div class="w-full text-center min-h-screen font-AnjomanMax_Bold text-green-600 mt-20 text-3xl">
+  <h1>پرداخت شما موفقیت آمیز بود</h1>
+  <p>شماره سفارش شما : {{order.id}}</p>
+</div>
+
 {% endblock %}

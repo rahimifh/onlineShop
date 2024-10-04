@@ -74,7 +74,7 @@ class OrderAdmin(admin.ModelAdmin):
         'id',
         'first_name',
         'last_name',
-        'email',
+        'phone',
         'address',
         'postal_code',
         'city',

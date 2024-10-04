@@ -20,19 +20,17 @@ class UserCreationForm(forms.ModelForm):
         model = Account
         fields = (
             "password",
-            "firstName",
-            "last_Name",
+            "first_name",
+            "last_name",
             "username",
             "phone",
             "country",
             "city",
             "email",
+            "postal_code",
             "birthday",
             "gender",
-            "education",
-            "social_media",
             "address",
-            "is_Business",
             "is_active",
             "is_staff",
             "is_superuser",
@@ -83,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("id", "username", "date_joined", "is_active", "is_admin", "firstName")
+    list_display = ("id", "username", "date_joined", "is_active", "is_admin", "first_name")
     list_filter = ("is_admin",)
     fieldsets = (
         (
@@ -91,17 +89,16 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "password",
-                    "firstName",
-                    "last_Name",
+                    "first_name",
+                    "last_name",
                     "username",
                     "phone",
                     "country",
                     "city",
                     "email",
+                    "postal_code",
                     "birthday",
                     "gender",
-                    "education",
-                    "social_media",
                     "address",
                     "profile_image",
                   

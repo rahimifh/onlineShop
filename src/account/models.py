@@ -63,8 +63,8 @@ def get_default_profile_image():
 
 
 class Account(AbstractBaseUser):
-    firstName = models.CharField(max_length=40, verbose_name="نام")
-    last_Name = models.CharField(max_length=40, verbose_name="نام خانوادگي")
+    first_name = models.CharField(max_length=40, verbose_name="نام")
+    last_name = models.CharField(max_length=40, verbose_name="نام خانوادگي")
     # STATUS=(('student','Student'),('teacher','Teacher'),)
     username = models.CharField(verbose_name="نام كاربري", max_length=30, unique=True)
     # IID = models.CharField(verbose_name="ایدی",max_length=30, unique=True)
@@ -79,17 +79,12 @@ class Account(AbstractBaseUser):
     gender = models.CharField(
         max_length=20, null=True, blank=True, verbose_name="جنسیت"
     )
-    education = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name="تحصیلات"
-    )
-    social_media = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name="ای دی شبکه اجتماعی"
-    )
+    phone = models.CharField(max_length=15, verbose_name="تلفن")
+    postal_code = models.CharField(max_length=20,verbose_name="کد پستی")
     address = models.CharField(
         max_length=200, null=True, blank=True, verbose_name="آدرس"
     )
     is_EmailVerified = models.BooleanField(default=False)
-    is_Business = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

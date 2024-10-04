@@ -55,7 +55,7 @@ def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         if user is not None:
             login(request, user)
             
-            return redirect("dashboard:account_overview") if next_url == "" else HttpResponseRedirect(next_url)
+            return redirect("cart:cart_detail") if next_url == "" else HttpResponseRedirect(next_url)
 
         context = {
             "message": default_message,
@@ -131,7 +131,7 @@ def logout_user(request: HttpRequest) -> HttpResponseRedirect:
         Redirect to login page.
     """
     logout(request)
-    return redirect("core:home")
+    return redirect("shop:home")
 
 
 # ------------------------------------------------------------------
@@ -340,7 +340,7 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
                     number=user.username,
                     message="ممنون که ثبت نام کردید به سورجی خوش آمدید www.soorchi.com",
                 )
-                return redirect("account:signupBusiness")
+                return redirect("cart:cart_detail")
             else:
                 for fields in form:
                     try:

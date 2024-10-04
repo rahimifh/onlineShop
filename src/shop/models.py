@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -35,8 +35,9 @@ class Product(models.Model):
         upload_to='products/%Y/%m/%d',
         blank=True
     )
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = RichTextUploadingField(blank=True)
+    Specifications = RichTextUploadingField(blank=True)
+    price = models.PositiveBigIntegerField(default=0)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
