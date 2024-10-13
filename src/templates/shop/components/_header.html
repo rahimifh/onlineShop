@@ -104,12 +104,12 @@
                 <a class="flex items-center h-full text-center rounded-full my-auto" title="خروج"
                    href="{% url 'account:logout' %}"><i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
                 </a>
-                <a class="button w-fit bg-primary px-5 before:bg-primary-500"
+                <a class="btn flex w-fit bg-primary px-5 before:bg-primary-500 text-white"
                    href="{% url 'orders:history' %}" title="داشبورد"><i class="fa-solid fa-user"></i>
-                    {{user.first_name}}</a>
+                    <p class="mx-2">{{user.first_name}}</p></a>
             {% else %}
                 <a href="{% url 'account:login' %}"
-                   class="button bg-primary px-10 before:bg-primary-500">
+                   class="btn bg-primary w-40 before:bg-primary-500 text-white text-sm">
                     ورود | ثبت نام
                 </a>
 
@@ -138,18 +138,18 @@
 
             <div class="h-[15vh] flex flex-col justify-end w-full gap-3">
                 {% if user.is_authenticated %}
-                   <a class="button w-full bg-primary px-5 before:bg-primary-500"
+                   <a class="btn w-full bg-primary px-5 before:bg-primary-500 text-white"
                        href="#" title="داشبورد"><i class="fa-solid fa-user"></i>
-                        {{user.first_name}}</a> 
+                        <p class="mx-2">{{user.first_name}}</p></a> 
                     
-                    <a class="button w-full bg-red-400 px-5 before:bg-red-300"
+                    <a class="btn w-full bg-red-400 px-5 before:bg-red-300"
                        title="خروج"
                        href="{% url 'account:logout' %}"><i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
                         خروج از حساب
                     </a>
                 {% else %}
                     <a href="{% url 'account:login' %}"
-                       class="button w-full bg-primary px-10 before:bg-primary-500">
+                       class="btn w-full bg-primary px-10 before:bg-primary-500 text-white text-sm">
                         ورود | ثبت نام
                     </a>
                 {% endif %}

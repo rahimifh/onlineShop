@@ -37,8 +37,10 @@
         </a>
         <div class="productDetail">
           <a class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-          <br>
-           <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
+          <div class="flex w-full justify-around">
+            {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
+            <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
+          </div>
         </div>
 
       </div>
