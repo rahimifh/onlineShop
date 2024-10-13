@@ -30,6 +30,7 @@ urlpatterns = [
     path('payment/', include('payment.urls', namespace='payment')),
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('', include('shop.urls', namespace='shop')),
+    path("back/account/", include("account.API.urls")),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

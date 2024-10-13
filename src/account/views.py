@@ -69,7 +69,8 @@ def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         "account/login.html",
         context={"next": next_url},
     )
-
+import pytz
+utc=pytz.UTC
 
 def login_with_sms(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     if request.user.is_authenticated:
@@ -80,7 +81,8 @@ def login_with_sms(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-
+        print(username)
+        print(password)
         try:
             user = Account.objects.get(username=username)
         except:
@@ -89,7 +91,7 @@ def login_with_sms(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         try:
             code_instance = ver_code.objects.get(phone=username, code=password)
             wait_time = datetime.timedelta(minutes=2)
-            if (code_instance.date_created + wait_time) < datetime.datetime.now():
+            if (code_instance.date_created + wait_time) < utc.localize(datetime.datetime.now()):
                 default_message = "زمان انقضای کد گذشته است."
                 user = None
             code_instance.delete()
@@ -104,7 +106,7 @@ def login_with_sms(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         if user is not None:
             login(request, user)
         
-            return redirect("dashboard:account_overview") if next_url == "" else HttpResponseRedirect(next_url)
+            return redirect("cart:cart_detail") if next_url == "" else HttpResponseRedirect(next_url)
         else:
             context = {
                 "message": default_message,
@@ -304,11 +306,12 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
             user = Account.objects.get(username=var.phone)
             if not user.is_active:
                 # Complete the registration process with user details
-                name = request.POST.get("name")
-                email = request.POST.get("email")
+                
                 password = request.POST.get("password")
-                user.name = name
-                user.email = email
+                user.first_name = request.POST.get("first_name")
+                user.last_name = request.POST.get("last_name")
+                user.username = request.POST.get("username")
+                user.phone = request.POST.get("username")
                 user.set_password(password)
                 user.is_active = True
                 user.save()
@@ -316,7 +319,7 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
                 login(request, user)
                 smsSender(
                     number=user.username,
-                    message="ممنون که ثبت نام کردید به سورجی خوش آمدید www.soorchi.com",
+                    message="ممنون که ثبت نام کردید به سورجی خوش آمدید oorsi.ir",
                 )
                 return redirect("account:signupBusiness")
             else:
@@ -330,6 +333,7 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
             if form.is_valid():
                 user = form.save(commit=False)
                 user.username = var.phone
+                user.phone = var.phone
                 try:
                     user.save()
                 except Exception as inst:
@@ -338,7 +342,7 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
                 login(request, user)
                 smsSender(
                     number=user.username,
-                    message="ممنون که ثبت نام کردید به سورجی خوش آمدید www.soorchi.com",
+                    message="ممنون که ثبت نام کردید به ارسی خوش آمدید oorsi.ir",
                 )
                 return redirect("cart:cart_detail")
             else:

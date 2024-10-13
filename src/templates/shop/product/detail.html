@@ -1,57 +1,57 @@
 {% extends "shop/base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block title %}
   {{ product.name }}
 {% endblock %}
 {% block content %}
   <div class="w-full mt-20  lg:px-10 lg:flex lg:justify-evenly lg:min-h-screen"> 
-    <div class="w-11/12 mx-auto m-2 lg:w-2/5 lg:px-20 lg:size-[500px] overflow-hidden border border-gray-500 rounded-md">
-      <img class="w-full mx-auto lg:size-[500px] lg:hover:size-[550px]" src="{% if product.image %}{{ product.image.url }}{% else %}
-      {%  static 'img/no_image.png' %}{% endif %}">
-    </div>
-<div class="lg:w-1/2">
-  <h1 class="font-AnjomanMax_ExBold text-xl">{{ product.name }}</h1>
-  <i class="fa-solid fa-star text-yellow-300"></i>
-  <i class="fa-solid fa-star text-yellow-300"></i>
-  <i class="fa-solid fa-star text-yellow-300"></i>
-  <i class="fa-solid fa-star text-yellow-300"></i>
-  <i class="fa-solid fa-star text-yellow-300"></i>
-  <hr>
+      <div class="w-11/12 mx-auto m-2 lg:w-2/5 lg:px-20 lg:size-[500px] overflow-hidden border border-gray-500 rounded-md">
+        <img class="w-full mx-auto lg:size-[500px] lg:hover:size-[550px]" src="{% if product.image %}{{ product.image.url }}{% else %}
+        {%  static 'img/no_image.png' %}{% endif %}">
+      </div>
+    <div class="w-full px-5 lg:p-0 lg:w-1/2">
+      <h1 class="font-AnjomanMax_ExBold text-xl">{{ product.name }}</h1>
+      <i class="fa-solid fa-star text-yellow-300"></i>
+      <i class="fa-solid fa-star text-yellow-300"></i>
+      <i class="fa-solid fa-star text-yellow-300"></i>
+      <i class="fa-solid fa-star text-yellow-300"></i>
+      <i class="fa-solid fa-star text-yellow-300"></i>
+      <hr>
 
-  <p class="font-AnjomanMax_ExBold text-green-600 my-2">{{ product.price }} تومان</p>
-  <div class="w-full flex justify-start">
-    <form class="w-1/2 flex justify-between items-center" action="{% url "cart:cart_add" product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <button class="button w-40 bg-green-200 flex justify-between items-center shadow-inner shadow-green-400 my-2 px-4 text-black lg:my-4" type="submit" > افزودن به سبد <img class="size-6" src="{% static 'img/cart.png' %}" alt=""></button>
-    </form>
-  </div>
+      <p class="font-AnjomanMax_ExBold text-green-600 my-2">{{ product.price | intcomma }} تومان</p>
+      <div class="w-full flex justify-start">
+        <form class="w-1/2 flex justify-between items-center" action="{% url "cart:cart_add" product.id %}" method="post">
+          {{ cart_product_form }}
+          {% csrf_token %}
+          <button class="button w-60 bg-green-200  shadow-inner shadow-green-400 my-2  text-black lg:my-4" type="submit" > افزودن به سبد <img class="size-6" src="{% static 'img/cart.png' %}" alt=""></button>
+        </form>
+      </div>
 
-<div class="mt-4">
-  <button id="desbtn1" onclick="win('description')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[18px]"> معرفی </button>
-  <button id="desbtn2"  onclick="win('Specifications')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[14px]"> مشخصات </button>
-  <hr>
-  <div id="description" class="text-justify w-full p-4">
-    {{ product.description|safe }}
-   </div>
-   <div id="Specifications" class="text-justify w-full p-4 hidden">
-    {{ product.Specifications|safe }}
-   </div>
-</div>
-
- 
-    <div class="recommendations">
-
-   
-      <h2>
-        <a class="button bg-red-600 w-40 my-2" href="{{ product.category.get_absolute_url }}">
-          {{ product.category }}
-        </a>
-      </h2>
+    <div class="mt-4">
+      <button id="desbtn1" onclick="win('description')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[18px]"> معرفی </button>
+      <button id="desbtn2"  onclick="win('Specifications')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[14px]"> مشخصات </button>
+      <hr>
+      <div id="description" class="text-justify w-full p-4">
+        {{ product.description|safe }}
+      </div>
+      <div id="Specifications" class="text-justify w-full p-4 hidden">
+        {{ product.Specifications|safe }}
+      </div>
     </div>
 
-</div>
+    
+        <div class="recommendations">
+
+      
+          <h2>
+            <a class="button bg-red-600 w-40 my-2" href="{{ product.category.get_absolute_url }}">
+              {{ product.category }}
+            </a>
+          </h2>
+        </div>
+
+    </div>
 
 
   </div>

@@ -64,7 +64,8 @@ class Order(models.Model):
             path = '/'
         return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
 
-
+    def get_items(self):
+        return OrderItem.objects.filter(order=self)
 class OrderItem(models.Model):
     order = models.ForeignKey(
         Order,

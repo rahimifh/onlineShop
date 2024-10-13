@@ -1,6 +1,6 @@
 {% extends "shop/base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block title %}
   {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
@@ -14,7 +14,7 @@
   <div id="main" class="w-full min-h-screen flex justify-center items-start ">
     <div>
 
-    <hr>
+      <hr class="my-2">
     <h1><a class="link my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h1>
     <div class="productBox">
     {% for product in products %}
@@ -25,7 +25,65 @@
         <div class="productDetail">
         <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
         <br>
-        {{ product.price }} تومان
+        {{ product.price | intcomma }} تومان
+      </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="my-2">
+  <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
+    <h2>اقتصادی</h2>
+    <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
+  </div>
+  <div class="productBox">
+    {% for product in chipest %}
+    <div class="item  mx-auto lg:mx-2">
+        <a href="{{ product.get_absolute_url }}">
+          <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <div class="productDetail">
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <br>
+        {{ product.price | intcomma }} تومان
+      </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="my-2">
+  <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
+    <h2>پیشنهادی</h2>
+    <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
+  </div>
+  <div class="productBox">
+    {% for product in mid %}
+    <div class="item  mx-auto lg:mx-2">
+        <a href="{{ product.get_absolute_url }}">
+          <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <div class="productDetail">
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <br>
+        {{ product.price | intcomma }} تومان
+      </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="my-2">
+  <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
+    <h2>مجلل</h2>
+    <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
+  </div>
+  
+  <div class="productBox">
+    {% for product in expensive %}
+    <div class="item  mx-auto lg:mx-2">
+        <a href="{{ product.get_absolute_url }}">
+          <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <div class="productDetail">
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <br>
+        {{ product.price | intcomma }} تومان
       </div>
       </div>
     {% endfor %}

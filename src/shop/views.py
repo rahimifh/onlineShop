@@ -5,12 +5,21 @@ from .models import Category, Product
 # from .recommender import Recommender
 
 def home(request):
-    products = Product.objects.filter(available=True)[:3]
+    All = Product.objects.all()
+    length = len(All)
+    products = All.filter(available=True)[:4]
+    chipest = All.order_by("price")[:4]
+    mid = All.order_by("price")[length/2-3:length/2+1]
+
+    expensive = All.order_by("-price")[:4]
     return render(
         request,
         'shop/product/home.html',
         {
             'products': products,
+            'chipest': chipest,
+            'mid': mid,
+            'expensive': expensive,
         },)
 def product_list(request, category_slug=None):
 

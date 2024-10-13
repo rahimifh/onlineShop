@@ -1,6 +1,6 @@
 {% extends "shop/base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block title %}
   {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
@@ -12,7 +12,7 @@
 
     <div class="flex justify-start items-center w-full lg:w-2/12 lg:block text-black font-extrabold"  id="sidebar">
       
-      <div class="flex flex-wrap w-full justify-around items-center lg:block lg:top-0    ">
+      <div class="flex flex-wrap w-full justify-around space-y-1 lg:space-y-4  items-center lg:block lg:top-0    ">
 
         <h1 class="hidden lg:block "> دسته بندی</h1>
 
@@ -38,7 +38,7 @@
         <div class="productDetail">
           <a class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
           <br>
-           <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price }} تومان </p>
+           <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
         </div>
 
       </div>

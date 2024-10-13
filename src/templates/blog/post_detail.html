@@ -1,7 +1,7 @@
 {% extends 'blog/post_base.html' %}
 {% load jalali_tags %}
 
-{% block title %} مجله سورچی | {{ post.title | truncatewords:10}} {% endblock title %}
+{% block title %} مجله ارسی | {{ post.title | truncatewords:10}} {% endblock title %}
 {% block customCss %}
     <meta name="description" content="{{ post.summary }}">
     <meta name="keywords" content="{% for tag in tags %} {{ tag.name }}, {% endfor %}">

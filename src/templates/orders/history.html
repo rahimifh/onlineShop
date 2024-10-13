@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="w-full pt-40 min-h-screen bg-blue-100">
+    <div class="w-full p-40 min-h-screen bg-blue-100">
         {% for i in orders %}
         <h1>{{i.phone}} </h1>
+        <h1>{{i.get_total_cost}} </h1>
+        
+       {% for j in i.get_items %}
+            <h1>{{j.product.name}} </h1>
+            <h1>{{j.price}} </h1>
+            <h1>{{j.quantity}} </h1>
+        {% endfor %} 
         {% endfor %}
     </div>
 

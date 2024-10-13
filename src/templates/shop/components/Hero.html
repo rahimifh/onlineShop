@@ -20,15 +20,11 @@
         <div class="h-2/5 md:h-1/2 bg-secondary text-white text-center md:text-start px-8 md:rounded-b-xl">
             <div class="md:w-1/2 flex flex-col gap-6 md:gap-7">
                 <h4 class="text-xl lg:text-2xl font-medium" style="line-height: 1.5">ساخت و طراحی وسایل برنزی منزل <br/> لوستر ، مبلمان (برنز)</h4>
-                {% if user.is_authenticated %}
-                    <a class="w-fit mx-auto md:mx-0 button font-medium text-xl bg-gray-300 px-5 before:bg-white text-black"
-                       href="#" title="شروع خرید"><i
-                            class="fa-solid fa-play animate-pulse "></i> شروع کنید</a>
-                {% else %}
+
                     <a class="w-fit mx-auto md:mx-0 button font-medium text-xl bg-gray-300 px-10 before:bg-white text-black"
-                       href="#" title="شروع خرید"><i class="fa-solid fa-play animate-pulse"></i>
-                        رایگان شروع کنید</a>
-                {% endif %}
+                       href="{% url 'shop:product_list' %}" title="شروع خرید"><i class="fa-solid fa-play animate-pulse"></i>
+                       همه محصولات</a>
+                
 
                 <button onclick="scrollDown()" class="md:hidden"><span
                         class="text-white text-xl flex items-end justify-center gap-1 hover:gap-2 transition-all"> اطلاعات بیشتر<i
