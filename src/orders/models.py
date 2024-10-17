@@ -1,4 +1,4 @@
-from decimal import Decimal
+
 from account.models import Account
 from coupons.models import Coupon
 from django.conf import settings
@@ -40,15 +40,18 @@ class Order(models.Model):
         return f'Order {self.id}'
 
     def get_total_cost_before_discount(self):
+
         return sum(item.get_cost() for item in self.items.all())
 
     def get_discount(self):
+
         total_cost = self.get_total_cost_before_discount()
         if self.discount:
-            return total_cost * (self.discount / Decimal(100))
-        return Decimal(0)
+            return total_cost * (self.discount)
+        return 0
 
     def get_total_cost(self):
+
         total_cost = self.get_total_cost_before_discount()
         return total_cost - self.get_discount()
 
@@ -77,7 +80,7 @@ class OrderItem(models.Model):
         related_name='order_items',
         on_delete=models.CASCADE
     )
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

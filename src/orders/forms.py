@@ -16,9 +16,11 @@ class OrderCreateForm(forms.ModelForm):
         ]
     def __init__(self, *args, **kwargs):
         super(OrderCreateForm, self).__init__(*args, **kwargs)
-        # print(type(self.instance))
-        # if self.instance:
-        #     self.fields["phone"].widget.attrs["value"] = self.instance.username
+ 
+        if isinstance(self.instance, Order):
+            self.fields["phone"].widget.attrs["value"] = self.instance.phone
+        else:
+             self.fields["phone"].widget.attrs["value"] = self.instance.username
         # self.fields["last_name"].widget.attrs["value"] = self.instance.lastName
 
         for visible in self.visible_fields():

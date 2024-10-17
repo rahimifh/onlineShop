@@ -15,7 +15,10 @@
     <div>
 
       <hr class="my-2">
-    <h1><a class="link my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h1>
+      <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
+        <h2>جدیدترین ها</h2>
+        <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
+      </div>
     <div class="productBox">
     {% for product in products %}
     <div class="item  mx-auto lg:mx-2  ">
@@ -34,7 +37,7 @@
   </div>
   <hr class="my-2">
   <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
-    <h2>اقتصادی</h2>
+    <h2>ارزانترین ها </h2>
     <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
   </div>
   <div class="productBox">
@@ -55,7 +58,7 @@
   </div>
   <hr class="my-2">
   <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
-    <h2>پیشنهادی</h2>
+    <h2>محبوبترین ها</h2>
     <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
   </div>
   <div class="productBox">
@@ -76,7 +79,7 @@
   </div>
   <hr class="my-2">
   <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
-    <h2>مجلل</h2>
+    <h2>گرانترین ها</h2>
     <h2><a class="my-4" href="{% url 'shop:product_list' %}">مشاهده همه</a></h2>
   </div>
   

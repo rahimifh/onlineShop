@@ -81,8 +81,6 @@ def login_with_sms(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        print(username)
-        print(password)
         try:
             user = Account.objects.get(username=username)
         except:

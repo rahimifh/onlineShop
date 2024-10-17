@@ -29,8 +29,6 @@ class LikeViewSet(viewsets.ModelViewSet):
         like = serializer.validated_data["is_liked"]
         user = serializer.validated_data["user"]
         post = serializer.validated_data["post"]
-        print("user", user)
-        print("is_liked : ", like)
         new_liked = Like.objects.filter(is_liked=True, post=post, user=user)
         if new_liked.exists():
             raise serializers.ValidationError(f"You have liked is post already.")

@@ -78,7 +78,6 @@ def get_phone_generate_code_to_login(request):
 
         code = generate_otp()
         x = veri_cod(phone=mobile, code=code, templateId=100000)
-        print(x)
         ver_code.objects.create(phone=mobile, code=code)
         return Response(
             data={

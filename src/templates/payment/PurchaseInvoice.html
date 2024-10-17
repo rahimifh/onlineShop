@@ -1,0 +1,69 @@
+{% extends "shop/base.html" %}
+{#{% block title %} {{ business.B_name }} پیش فاکتور  {% endblock %}#}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <div class="flex mt-20 flex-col justify-center items-center w-[100vw]">
+        <h1 class=" text-3xl linear-background p-2 my-8 rounded-md text-gray-900 font-bold text-center"> پیش
+            فاکتور </h1>
+        <div id="table-container" class="table_container">
+
+            <table id="my-table" class="rwd-table">
+                <tbody>
+                <tr>
+                    <th class="font-bolder text-4">خریدار</th>
+                    <th class="font-bolder text-4">فروشنده</th>
+                    <!-- Add more table headers for additional order details -->
+                </tr>
+                <tr>
+                    <td data-th="خریدار">{{ user.first_name }} {{user.last_name }}</td>
+                    <td data-th="فروشنده">فروشگاه ارسی</td>
+                    <!-- Add more table cells for additional i details -->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="table-container" class="table_container mt-10">
+
+            <table id="my-table" class="rwd-table">
+                <tbody>
+                <tr>
+
+                    <th class="font-bolder text-4">شماره سفارش </th>
+                    <th class="font-bolder text-4">قیمت محصول</th>
+                    {% comment %} <th class="font-bolder text-4">مالیات</th> {% endcomment %}
+                    <th class="font-bolder text-4">تخفیف</th>
+                    <th class="font-bolder text-4">قیمت نهایی</th>
+                    <!-- Add more table headers for additional order details -->
+                </tr>
+                <tr>
+  
+                    <td data-th="قیمت محصول"><p id="price"> {{ order.id }}</p></td>
+                    <td data-th="قیمت محصول"><p id="price">تومان: {{ order.price |  intcomma }}</p></td>
+                    {% comment %} <td data-th="مالیات"><p id="tax">10%</p></td> {% endcomment %}
+                    <td data-th="تخفیف"><p id="discount">%{{ order.get_discount }}</p></td>
+                    <td data-th="قیمت نهایی" ><h6 id="FinalPrice">تومان: {{ order.get_total_cost | intcomma }}</h6></td>
+                    <!-- Add more table cells for additional i details -->
+                </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-center items-center flex-col">
+                {% if mess %}{{ mess }}{% endif %}
+                <br>
+                <form action="{% url 'payment:process'  %}" method="post">
+                    <input type="text" id="sendcode" name="code" value='00' hidden>
+                    {% csrf_token %}
+                    <button class="btn bg-green-500"
+                            type="submit">انتقال به درگاه بانک
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% block customjs %}
+   
+
+        {% endblock %}
+    </div>
+{% endblock %}

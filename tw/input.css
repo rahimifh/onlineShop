@@ -96,6 +96,9 @@ body {
     .button {
         @apply flex items-center border border-transparent rounded-lg p-2    ;
     }
+    .btn{
+        @apply appearance-none border border-transparent rounded-[16px] border-b-4 border-b-transparent box-border text-white cursor-pointer inline-block font-bold text-sm tracking-wide leading-5 m-0 outline-none overflow-visible py-[13px] text-center uppercase touch-manipulation transform select-none align-middle whitespace-nowrap relative before:content-[''] before:border before:border-transparent before:rounded-[16px] before:border-b-4 before:absolute before:inset-0 before:z-[-1] hover:filter hover:brightness-110 disabled:cursor-auto active:border-t-4 active:border-b-0 active:bg-transparent;
+    }
     .codeinput{
         @apply rounded-md mx-2
     }
@@ -111,19 +114,22 @@ body {
     }
 
     .active-link {
-        @apply bg-green-300 rounded-full px-2 h-12  flex justify-center items-center shadow-inner shadow-blue-100;
+        @apply bg-green-300 rounded-lg px-2 h-12  flex justify-center items-center shadow-inner shadow-blue-100;
     }
     .link {
-        @apply bg-green-100 rounded-full px-2 h-12  flex justify-center items-center shadow-inner shadow-blue-200;
+        @apply bg-green-100 rounded-lg px-2 h-12  flex justify-center items-center shadow-inner shadow-blue-200;
     }
     .productBox{
         @apply grid grid-cols-2 lg:grid-cols-4 gap-2 p-2
     }
     .productImg{
-        @apply  rounded-md  w-auto  hover:shadow-md hover:shadow-gray-400;
+        @apply  rounded-md  w-auto  ;
     }
     .productDetail{
         @apply w-full p-2 
+    }
+    .item{
+        @apply hover:shadow-md hover:shadow-gray-400 border-r;
     }
 }
 
