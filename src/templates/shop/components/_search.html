@@ -1,0 +1,26 @@
+<div class="w-full h-14 flex justify-around items-center z-20 fixed top-0 bg-white">
+
+
+  <form class="flex justify-center items-center"  action="{% url 'shop:search_results' %}" method="get">
+      <input class="w-full border h-12 rounded-xl mr-2 px-2" name="q" type="text" placeholder="جستجو...">
+      <button class="link px-4 mx-2" type="submit">جستجو</button>
+
+    </form>
+    
+    <div class="hidden lg:flex items-end justify-end lg:justify-end gap-6 h-full">
+      {% if user.is_authenticated %}
+          <a class="flex items-center h-full text-center rounded-full my-auto" title="خروج"
+            href="{% url 'account:logout' %}"><i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
+          </a>
+          <a class="btn flex w-fit bg-primary px-5 before:bg-primary-500 text-white"
+            href="{% url 'orders:history' %}" title="داشبورد"><i class="fa-solid fa-user"></i>
+              <p class="mx-2">{{user.first_name}}</p></a>
+      {% else %}
+          <a href="{% url 'account:login' %}"
+            class="btn bg-primary w-40 before:bg-primary-500 text-white text-sm">
+              ورود | ثبت نام
+          </a>
+      {% endif %}
+  </div>
+
+</div>

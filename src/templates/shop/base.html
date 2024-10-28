@@ -4,21 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}My shop{% endblock %}</title>
+  <title>{% block title %} فروشگاه ارسی{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="{% static 'css/base.css' %}?v=40" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}?v=54" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
-<body>
+<body class="font-serif">
+  {% include 'shop/components/_search.html' %}
   {% include 'shop/components/_header.html' %}
   {% block content %}
   {% endblock %}
+
+  <div class="hidden flex-col justify-center fixed top-10 lg:top-40 lg:left-1/3 size-[100%] lg:size-[50%] bg-blue-100 rounded-md shadow " id="modal">
+    <button onclick="modal('0')" class="absolute top-0 m-2 p-1 rounded-sm bg-red-600 text-white font-bold">بستن</button>
+    <form class="flex flex-col" action="{% url 'shop:add_order' %}" method="post" enctype="multipart/form-data">
+       <p class="mx-auto mt-8 bg-blue-100  rounded-lg p-1">اگر محصول مورد علاقه شما در سایت نیست می توانید اینجا آن را سفارش دهید</p>
+        {% csrf_token %}
+        <input class="mx-auto w-80 h-12 border rounded-md my-4 text-center" type="text" name="name" placeholder="نام محصول">
+        <input class="mx-auto w-80 h-12 border rounded-md my-4 text-center" type="text" name="phone" {% if user.is_authenticated %} value="{{user.username}}"{% endif %} placeholder="تلفن ">
+        <textarea class="mx-auto w-80 h-20 border rounded-md my-4 text-center" name="description" placeholder="توضیحات" id=""></textarea>
+        <p class="mx-auto">اگر تصویر یا طرحی از محصول مورد نظر خود دارید انتخاب کنید</p>
+        <input class="mx-auto my-4 text-center" type="file" name="image">
+        <button class="link w-32 my-4 mx-auto" type="submit">ثبت</button>
+    </form>
+  </div>
+  
 {% include 'shop/components/_footer.html' %}
 
 
 {% block customJs %}
 {% endblock %}
+<script>
+    function modal(command) {
+        if (command == '1') {
+            document.getElementById("modal").style.display = "flex";
+        }else if(command == '0'){
+            document.getElementById("modal").style.display = "none";
+        }
+        
+    }
+</script>
 <script>
   // JavaScript to toggle responsive menu
 

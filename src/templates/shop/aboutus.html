@@ -1,0 +1,44 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+  درباره ما
+{% endblock %}
+
+{% block content %}
+<div class="mt-20">
+  <div class="w-full text-center">
+    <h2>
+      برنز ارسی
+    </h2>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 px-2 lg:gap-12 lg:px-20 mt-4 lg:mb-20">
+
+      <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div>
+      {% comment %} <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div>
+      <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div>
+      <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div>
+      <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div>
+      <div class="text-center  ">
+          <video class="rounded-md shadow-inner shadow-gray-700 h-[80vh]" src="{% static 'videos/ads1.mp4' %}" controls></video>
+          <h2 class=" ">معرفی ما</h2>
+  </div> {% endcomment %}
+
+</div>
+</div>
+{% endblock %}

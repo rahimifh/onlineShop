@@ -2,7 +2,7 @@
 <style>
     .header {
         position: fixed;
-        top: 0;
+        top: 56px;
         left: 0;
         width: 100%;
         transition: 0.5s ease-in-out;
@@ -61,16 +61,16 @@
                      <i class="fas fa-home"></i> خانه </a></li>
                     |
                     <li><a class="hover:text-primary transition-all font-medium nav-link"
-                           href="#">
-                        <i class="fas fa-info-circle"></i> درباره ما</a></li>
-                    |
-                    <li><a class="hover:text-primary transition-all font-medium nav-link"
                            href="{% url 'shop:product_list' %}">
                         <i class="fas fa-list"></i>دسته بندی</a></li>
                     |
                     <li><a class="hover:text-primary transition-all font-medium nav-link"
                            href="{% url 'blog:post-list' %}">
                         <i class="fas fa-book"></i> مجله   محصولات برنز خلیج فارس</a></li>
+                    |
+                    <li><a class="hover:text-primary transition-all font-medium nav-link"
+                            href="{% url 'shop:about' %}">
+                            <i class="fas fa-info-circle"></i> درباره ما</a></li>
                 </ul>
             </div>
         </nav>
@@ -82,15 +82,12 @@
                   <a class="relative" href="{% url 'cart:cart_detail' %}">
                     <img src="{% static 'img/logo.png' %}" 
                         class="w-full object-contain rounded-xl animate-wiggle hover:animate-spin  animate-infinite animate-ease-in-out transition-all h-[40px] lg:h-[50px] -z-10">
-                 
-                    
+
                       <p class="absolute size-7 flex justify-center items-center rounded-full bg-red-700 text-white font-AnjomanMax_Black -mt-5 -mr-4 z-20">{{ total_items }}</p>
-                     
                     </a>
                   {% elif not order %}
                   <img src="{% static 'img/logo.png' %}" onclick="alert('سبد شما خالی است')"
                         class="w-full object-contain rounded-xl animate-wiggle hover:animate-spin  animate-infinite animate-ease-in-out transition-all h-[40px] lg:h-[50px]"
-                    
                   alt="logo">
                   {% endif %}
                 {% endwith %}
@@ -98,47 +95,34 @@
            
             </a>
         </div>
-        {#  Desktop Login btn  #}
-        <div class="hidden lg:flex items-end justify-end lg:justify-end gap-6 h-full">
-            {% if user.is_authenticated %}
-                <a class="flex items-center h-full text-center rounded-full my-auto" title="خروج"
-                   href="{% url 'account:logout' %}"><i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
-                </a>
-                <a class="btn flex w-fit bg-primary px-5 before:bg-primary-500 text-white"
-                   href="{% url 'orders:history' %}" title="داشبورد"><i class="fa-solid fa-user"></i>
-                    <p class="mx-2">{{user.first_name}}</p></a>
-            {% else %}
-                <a href="{% url 'account:login' %}"
-                   class="btn bg-primary w-40 before:bg-primary-500 text-white text-sm">
-                    ورود | ثبت نام
-                </a>
-
-
-            {% endif %}
-        </div>
-        {#  Mobile navbar  #}
+        <!-- {#  Desktop Login btn  #} -->
+        <button class="hidden lg:flex w-52" onclick="modal('1')"><a class="hover:text-primary transition-all font-medium nav-link"
+          >
+         <i class="fas fa-pen"></i>سفارش اختصاصی </a> </button>
+        <!-- {#  Mobile navbar  #} -->
         <div id="mobile-nav"
              class="fixed flex-col justify-between items-center w-[80%] bg-white text-black right-0 top-0 p-[2.5rem] transform translate-x-[100%] gap-5 transition-transform duration-300 ease shadow"
              style="z-index: 12;">
-            <div class="h-30 w-full flex justify-end cursor-pointer" onclick="toggleMobileMenu()">
+            <div class="h-30 w-full mt-4 flex justify-end cursor-pointer" onclick="toggleMobileMenu()">
                 <i class="fa-solid fa-xmark text-2xl"></i>
             </div>
 
             <ul class="gap-12 flex flex-col justify-start items-start h-[70vh] mt-5 overflow-y-auto">
                 <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'shop:home' %}"><i
                         class="fas fa-home"></i> خانه </a></li>
-                <li><a class="hover:text-primary transition-all font-medium nav-link" href="#"><i
-                        class="fas fa-info-circle"></i> درباره ما</a></li>
                 <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'shop:product_list' %}"><i
                         class="fas fa-list"></i> دسته بندی </a></li>
                 <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'blog:post-list' %}"><i
                         class="fas fa-book"></i> مجله   محصولات برنز خلیج فارس</a></li>
+                <li><a class="hover:text-primary transition-all font-medium nav-link" href="{% url 'shop:about' %}"><i
+                            class="fas fa-info-circle"></i> درباره ما</a></li>
             </ul>
 
 
-            <div class="h-[15vh] flex flex-col justify-end w-full gap-3">
+            <div class="h-[15vh] flex flex-col justify-end w-full gap-2">
+                <button class="flex  bottom-5 right-5 primary_btn w-" onclick="modal('1')">سفارش اختصاصی</button>
                 {% if user.is_authenticated %}
-                   <a class="btn w-full bg-primary px-5 before:bg-primary-500 text-white"
+                   <a class="btn w-full flex justify-center bg-primary px-5 before:bg-primary-500 text-white"
                        href="#" title="داشبورد"><i class="fa-solid fa-user"></i>
                         <p class="mx-2">{{user.first_name}}</p></a> 
                     

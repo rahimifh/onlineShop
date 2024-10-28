@@ -14,7 +14,7 @@
 
             <div class="w-1/2 p-4 flex justify-center items-center">
               <a href="{{ product.get_absolute_url }}">
-                <img class="w-full lg:size-[500px] border border-gray-300" src="{% if product.image %}{{ product.image.url }}
+                <img class="w-full lg:size-40 border border-gray-300" src="{% if product.image %}{{ product.image.url }}
                 {% else %}{% static "img/no_image.png" %}{% endif %}">
               </a>
             </div>

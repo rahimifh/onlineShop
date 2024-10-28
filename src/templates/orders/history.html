@@ -5,16 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    <div class="w-full p-40 min-h-screen bg-blue-100">
+    <div class="w-full p-40 min-h-screen bg-blue-100 ">
         {% for i in orders %}
-        <h1>{{i.phone}} </h1>
-        <h1>{{i.get_total_cost}} </h1>
+        <div class="w-screen lg:w-auto bg-gray-300 my-2">
+        <p>شماره سفارش: {{i.id}}  </p>
         
-       {% for j in i.get_items %}
-            <h1>{{j.product.name}} </h1>
-            <h1>{{j.price}} </h1>
-            <h1>{{j.quantity}} </h1>
-        {% endfor %} 
+        <p>جمع کل مبلغ پرداختی </p>
+        <div class="flex flex-wrap w-full bg-gray-100">
+            {% for j in i.get_items %}
+                <div class="flex justify-evenly items-center w-full lg:w-56 ">
+                    <div class="w-16 h-16">
+                        <img src="{{j.product.image.url}}" class="w-16" alt="">
+                    </div>
+                    <div>
+                        <p>نام: {{j.product.name}}</p>
+                        <p>قیمت: {{j.price}}</p>
+                        <p>تعداد: {{j.quantity}}</p>
+                    </div>
+
+                </div>
+
+            {% endfor %} 
+        </div>
+        </div>
         {% endfor %}
     </div>
 
