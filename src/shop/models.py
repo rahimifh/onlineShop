@@ -42,6 +42,9 @@ class Product(models.Model):
         upload_to='products/%Y/%m/%d',
         blank=True
     )
+    size = models.CharField(max_length=100, blank=True, null=True)
+    weight = models.CharField(max_length=100, blank=True, null=True)
+    deliveryTime= models.CharField(max_length=100, blank=True, null=True)
     description = RichTextUploadingField(blank=True)
     Specifications = RichTextUploadingField(blank=True)
     price = models.PositiveBigIntegerField(default=0)

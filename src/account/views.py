@@ -317,7 +317,7 @@ def signup(request: HttpRequest, code: str) -> HttpRequest | HttpResponseRedirec
                 login(request, user)
                 smsSender(
                     number=user.username,
-                    message="ممنون که ثبت نام کردید به فروشگاه برنز خلیج فارس خوش آمدید oorsi.ir",
+                    message="ممنون که ثبت نام کردید به فروشگاه ارسیخوش آمدید oorsi.ir",
                 )
                 return redirect("account:signupBusiness")
             else:

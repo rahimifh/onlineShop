@@ -92,7 +92,9 @@ body {
 
 
 @layer components {
-
+    .proname{
+        @apply proname h-10
+    }
     .button {
         @apply flex items-center border border-transparent rounded-lg p-2;
     }
@@ -129,7 +131,7 @@ body {
         @apply w-full p-2;
     }
     .item{
-        @apply flex justify-start items-center lg:block hover:shadow-md hover:shadow-gray-400 hover:rounded-xl border-r;
+        @apply flex justify-start items-center lg:block hover:shadow-md hover:shadow-gray-400 hover:rounded-xl border-r border-b;
     }
 }
 

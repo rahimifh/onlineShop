@@ -24,7 +24,7 @@
             <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
        
             <div class="productDetail">
-              <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+              <p class="proname" >{{ product.name }}</p>
               <div class="flex w-full justify-around">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               

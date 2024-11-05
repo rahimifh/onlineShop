@@ -16,11 +16,11 @@
 
         <h1 class="hidden xl:block mr-4"> دسته بندی</h1>
 
-          <a {% if not category %}class="active-link mx-auto"{% else %} class="link mx-auto" {% endif %} href="{% url "shop:product_list" %}" style="background-image: url({% static 'img/button_category.png' %});"><p class="w-10/12 h-full  bg-yellow-200/25 flex justify-center items-center">همه</p></a>
+          <a {% if not category %}class="active-link mx-auto"{% else %} class="link mx-auto" {% endif %} href="{% url "shop:product_list" %}" style="background-image: url({% static 'img/button_category.png' %});"><p class="w-10/12 h-full  flex justify-center items-center">همه</p></a>
 
         {% for c in categories %}
         
-            <a {% if category.slug == c.slug %}class="active-link mx-auto" {% else %} class="link mx-auto" {% endif %} href="{{ c.get_absolute_url }}" style="background-image: url({% static 'img/button_category.png' %});"><p class="w-10/12 h-full  bg-yellow-200/25 flex justify-center items-center">{{ c.name }}</p></a>
+            <a {% if category.slug == c.slug %}class="active-link mx-auto" {% else %} class="link mx-auto" {% endif %} href="{{ c.get_absolute_url }}" style="background-image: url({% static 'img/button_category.png' %});"><p class="w-10/12 h-full   flex justify-center items-center">{{ c.name }}</p></a>
          
         {% endfor %}
         </div>
@@ -31,24 +31,25 @@
     <h1 class="w-full border-b border-gray-200 my-4">{% if category %}{{ category.name }}{% else %}محصولات{% endif %}</h1>
     <div class="productBox">
     {% for product in products %}
-  
+
     <a href="{{ product.get_absolute_url }}">
+
       <div class="item  mx-auto lg:mx-2  ">
             <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
        
             <div class="productDetail">
-              <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+              <p class="proname" >{{ product.name | truncatechars:75 }}</p>
               <div class="flex w-full justify-around">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-16">
+                <div class="h-24">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-16">
+              <div class="h-24">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>

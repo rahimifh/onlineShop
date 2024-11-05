@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block title %}
-  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+  {% if category %}{{ category.name }}{% else %}محصولات{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -22,27 +22,27 @@
     </div>
     <div>
       <div class="bg-red-800 text-white lg:rounded-xl p-2" style="background-image: url({% static 'img/bg.jpg' %});">
-      <div class="w-full flex justify-between px-10 font-AnjomanMax_Bold ">
+      <div class="w-full flex justify-between lg:px-10 font-AnjomanMax_Bold ">
         <h2>فروش ویژه</h2>
       </div>
       <div class="  overflow-scroll ">
-        <div class="inline-flex gap-4 w-auto py-6">
+        <div class="inline-flex gap-4 w-auto lg:py-6">
         {% for item in special %}
           {% for product in item.products.all %}
           <a href="{{ product.get_absolute_url }}">
-            <div class=" w-52 bg-white text-black rounded-xl text-sm  mx-auto lg:mx-2  ">
+            <div class=" w-40 lg:w-52  bg-white text-black rounded-xl text-sm  mx-auto lg:mx-2  ">
                 
                   <img class="w-auto rounded-xl" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
          
                 <div class="productDetail">
-                  <p class="font-AnjomanMax_Thin text-sm flex flex-wrap lg:font-AnjomanMax_SemiBold lg:text-base " href="{{ product.get_absolute_url }}">{{ product.name | truncatechars:20 }}</p>
+                  <p class="font-AnjomanMax_Thin text-sm flex flex-wrap  lg:text-base " href="{{ product.get_absolute_url }}">{{ product.name | truncatechars:75 }}</p>
                   <div class="flex w-full justify-around">
-                    {% if product.available == True %} <p class="text-green-600 ">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
+                    {% if product.discount  %} <p class="bg-red-800 text-white rounded-full h-5 w-8  font-bold text-center">%{{product.discount}}</p>{% endif %}
 
                       {% if product.discount != 0 %} 
                       <div class="h-16">
                         <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
-                      <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
+                      
                       <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
                     </div>
                     {% else %}
@@ -77,7 +77,7 @@
             <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
        
             <div class="productDetail">
-              <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+              <p class="proname" >{{ product.name | truncatechars:75 }}</p>
               <div class="flex w-full justify-around">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
@@ -133,7 +133,7 @@
               <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
          
               <div class="productDetail">
-                <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+                <p class="proname" >{{ product.name | truncatechars:75 }}</p>
                 <div class="flex w-full justify-around">
                   {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
                 
@@ -169,7 +169,7 @@
             <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
        
             <div class="productDetail">
-              <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+              <p class="proname" >{{ product.name | truncatechars:75 }}</p>
               <div class="flex w-full justify-around">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
@@ -206,7 +206,7 @@
             <img class="productImg" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
        
             <div class="productDetail">
-              <p class="font-AnjomanMax_Thin text-sm flex flex-wrap w-full lg:font-AnjomanMax_SemiBold  lg:text-xl" >{{ product.name }}</p>
+              <p class="proname" >{{ product.name | truncatechars:75 }}</p>
               <div class="flex w-full justify-around">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
