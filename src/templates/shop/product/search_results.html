@@ -25,17 +25,17 @@
        
             <div class="productDetail">
               <p class="proname" >{{ product.name }}</p>
-              <div class="flex w-full justify-around">
+              <div class="flex w-full justify-around items-center">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-16">
+                <div class="priceTag">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-16">
+              <div class="priceTag">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>

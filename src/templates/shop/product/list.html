@@ -4,7 +4,13 @@
 {% block title %}
   {% if category %}{{ category.name }}{% else %}محصولات ارسی{% endif %}
 {% endblock %}
-
+{% block custommeta %}
+<meta name="title" content="لیست تمام محصولات برنزی و برنجی ارسی">
+<meta name="description"
+      content="  تنوع بالای محصولات برنزی ارسی به شما برای چیدمان منزلتان کمک می کند  ">
+<meta name="keywords" content="فروشگاه برنز, برنز, ارسی, برنز ارسی, برنز با کیفیت, دکوراسیون, برنز اصل, محصولات برنجی, برنجی ارسی, مجسمه برنزی, لوستر, لوستر برنزی">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+{% endblock custommeta %}
 {% block content %}
 
   <div id="main" class="w-full min-h-screen flex justify-center items-start pt-32">
@@ -39,17 +45,17 @@
        
             <div class="productDetail">
               <p class="proname" >{{ product.name | truncatechars:75 }}</p>
-              <div class="flex w-full justify-around">
+              <div class="flex w-full justify-around items-center">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-24">
+                <div class="h-24 flex  justify-around items-center">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-24">
+              <div class="h-24 flex  justify-around items-center">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>

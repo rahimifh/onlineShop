@@ -555,20 +555,12 @@ video {
 }
 
 .proname {
-  display: flex;
   height: 2.5rem;
-  width: 100%;
-  flex-wrap: wrap;
-  font-family: AnjomanMax-Thin;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .proname {
-    font-family: AnjomanMax_SemiBold;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+    height: 6rem;
   }
 }
 
@@ -811,6 +803,13 @@ video {
   .item {
     display: block;
   }
+}
+
+.priceTag {
+  display: flex;
+  height: 6rem;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .static {
@@ -2544,6 +2543,10 @@ body {
     margin-bottom: 5rem;
   }
 
+  .lg\:mt-20 {
+    margin-top: 5rem;
+  }
+
   .lg\:mt-24 {
     margin-top: 6rem;
   }
@@ -2711,10 +2714,6 @@ body {
     font-family: AnjomanMax_Black;
   }
 
-  .lg\:font-AnjomanMax_SemiBold {
-    font-family: AnjomanMax_SemiBold;
-  }
-
   .lg\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -2728,11 +2727,6 @@ body {
   .lg\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .lg\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
   }
 
   .lg\:hover\:w-\[600px\]:hover {

@@ -93,7 +93,7 @@ body {
 
 @layer components {
     .proname{
-        @apply proname h-10
+        @apply  h-10 lg:h-24;
     }
     .button {
         @apply flex items-center border border-transparent rounded-lg p-2;
@@ -116,10 +116,10 @@ body {
     }
 
     .active-link {
-        @apply   lg:px-2 h-6 w-36 xl:h-12 xl:w-[270px] bg-cover text-xs font-AnjomanMax_ExBold  text-green-800 lg:text-base flex justify-center items-center ;
+        @apply lg:px-2 h-6 w-36 xl:h-12 xl:w-[270px] bg-cover text-xs font-AnjomanMax_ExBold  text-green-800 lg:text-base flex justify-center items-center ;
     }
     .link {
-        @apply   lg:px-2 h-6 w-36 xl:h-12 xl:w-[270px] bg-cover text-xs lg:text-base flex justify-center items-center  ;
+        @apply lg:px-2 h-6 w-36 xl:h-12 xl:w-[270px] bg-cover text-xs lg:text-base flex justify-center items-center;
     }
     .productBox{
         @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-2;
@@ -128,10 +128,13 @@ body {
         @apply w-1/3 rounded-md  md:w-auto;
     }
     .productDetail{
-        @apply w-full p-2;
+        @apply w-full p-2 ;
     }
     .item{
         @apply flex justify-start items-center lg:block hover:shadow-md hover:shadow-gray-400 hover:rounded-xl border-r border-b;
+    }
+    .priceTag{
+        @apply h-24 flex  justify-around items-center;
     }
 }
 

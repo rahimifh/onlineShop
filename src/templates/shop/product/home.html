@@ -5,6 +5,13 @@
   {% if category %}{{ category.name }}{% else %}محصولات{% endif %}
 {% endblock %}
 
+{% block custommeta %}
+<meta name="title" content="ارسی یک بازار مطمئن و ارزان, برای محصولات برنزی است.">
+<meta name="description"
+      content="  ارسی بورس کلاهای برنزی با کیفیت و قیمت مناسب برای شما همین حالا خرید خودتون رو سفارش بدید. و منزل خودتون رو به شیکترین محصولات برنزی مجهز کنید  ">
+<meta name="keywords" content="فروشگاه برنز, برنز, ارسی, برنز ارسی, برنز با کیفیت, دکوراسیون, برنز اصل, محصولات برنجی, برنجی ارسی, مجسمه برنزی, لوستر, لوستر برنزی">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+{% endblock custommeta %}
 {% block content %}
 {#  Hero  #}
 
@@ -36,17 +43,17 @@
          
                 <div class="productDetail">
                   <p class="font-AnjomanMax_Thin text-sm flex flex-wrap  lg:text-base " href="{{ product.get_absolute_url }}">{{ product.name | truncatechars:75 }}</p>
-                  <div class="flex w-full justify-around">
+                  <div class="flex w-full justify-around items-center">
                     {% if product.discount  %} <p class="bg-red-800 text-white rounded-full h-5 w-8  font-bold text-center">%{{product.discount}}</p>{% endif %}
 
                       {% if product.discount != 0 %} 
-                      <div class="h-16">
+                      <div class="priceTag">
                         <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                       
                       <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
                     </div>
                     {% else %}
-                    <div class="h-16">
+                    <div class="priceTag">
                       <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
 
                   </div>
@@ -78,17 +85,17 @@
        
             <div class="productDetail">
               <p class="proname" >{{ product.name | truncatechars:75 }}</p>
-              <div class="flex w-full justify-around">
+              <div class="flex w-full justify-around ">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-16">
+                <div class="priceTag">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-16">
+              <div class="priceTag">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>
@@ -134,17 +141,17 @@
          
               <div class="productDetail">
                 <p class="proname" >{{ product.name | truncatechars:75 }}</p>
-                <div class="flex w-full justify-around">
+                <div class="flex w-full justify-around items-center">
                   {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
                 
                   {% if product.discount != 0 %} 
-                  <div class="h-16">
+                  <div class="priceTag">
                     <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                   <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                   <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
                 </div>
                 {% else %}
-                <div class="h-16">
+                <div class="priceTag">
                   <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
     
               </div>
@@ -170,17 +177,17 @@
        
             <div class="productDetail">
               <p class="proname" >{{ product.name | truncatechars:75 }}</p>
-              <div class="flex w-full justify-around">
+              <div class="flex w-full justify-around items-center">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-16">
+                <div class="priceTag">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-16">
+              <div class="priceTag">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>
@@ -207,17 +214,17 @@
        
             <div class="productDetail">
               <p class="proname" >{{ product.name | truncatechars:75 }}</p>
-              <div class="flex w-full justify-around">
+              <div class="flex w-full justify-around items-center">
                 {% if product.available == True %} <p class="text-green-500 text-sm">موجود  در انبار</p>{% else %} <p class="text-red-500 text-sm">موجود نیست</p>{% endif %}
               
                 {% if product.discount != 0 %} 
-                <div class="h-16">
+                <div class="priceTag">
                   <p class="text-red-800 line-through font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
                 <p class="text-red-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">%{{product.discount}}</p>
                 <p class="text-green-800 font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{product.get_final_price | intcomma }} تومان</p>
               </div>
               {% else %}
-              <div class="h-16">
+              <div class="priceTag">
                 <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
   
             </div>
