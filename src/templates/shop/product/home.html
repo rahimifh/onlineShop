@@ -42,7 +42,7 @@
                   <img class="w-auto rounded-xl" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
          
                 <div class="productDetail">
-                  <p class="font-AnjomanMax_Thin text-sm flex flex-wrap  lg:text-base " href="{{ product.get_absolute_url }}">{{ product.name | truncatechars:75 }}</p>
+                  <p class="font-AnjomanMax_Thin text-sm flex flex-wrap  lg:text-base " href="{{ product.get_absolute_url }}">{{ product.name | truncatechars:50 }}</p>
                   <div class="flex w-full justify-around items-center">
                     {% if product.discount  %} <p class="bg-red-800 text-white rounded-full h-5 w-8  font-bold text-center">%{{product.discount}}</p>{% endif %}
 
@@ -55,12 +55,8 @@
                     {% else %}
                     <div class="priceTag">
                       <p class="text-green-800  font-AnjomanMax_Regular lg:font-AnjomanMax_Black">{{ product.price | intcomma }} تومان </p>
-
                   </div>
                       {% endif %}
-
-                  
-                    
                   </div>
                 </div>
               </div>

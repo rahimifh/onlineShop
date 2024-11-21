@@ -42,6 +42,10 @@ class Product(models.Model):
         upload_to='products/%Y/%m/%d',
         blank=True
     )
+    image2 = models.ImageField(
+        upload_to='products/%Y/%m/%d',
+        blank=True
+    )
     size = models.CharField(max_length=100, blank=True, null=True)
     weight = models.CharField(max_length=100, blank=True, null=True)
     deliveryTime= models.CharField(max_length=100, blank=True, null=True)

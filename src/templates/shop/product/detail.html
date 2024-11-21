@@ -15,10 +15,23 @@
       
 {% endblock custommeta %}
 {% block content %}
-  <div class="w-full mt-24 lg:mt-20  lg:px-10 lg:flex lg:justify-evenly lg:min-h-screen"> 
+  <div class="w-full mt-36   lg:px-10 lg:flex lg:justify-evenly lg:min-h-screen"> 
       <div class="w-11/12 mx-auto m-2 lg:w-2/5 lg:px-20 lg:size-[500px] overflow-visible">
-        <img class="w-full mx-auto lg:w-[500px] lg:hover:w-[600px]" src="{% if product.image %}{{ product.image.url }}{% else %}
-        {%  static 'img/no_image.png' %}{% endif %}" aria-details="True">
+        <div >
+          <div class="overflow-visible">
+            <img id="image1" class="w-full mx-auto lg:w-[500px] lg:hover:w-[600px]" src="{% if product.image %}{{ product.image.url }}{% else %}
+            {%  static 'img/no_image.png' %}{% endif %}" aria-details="True">
+      
+            <img id="image2" class="hidden w-full mx-auto lg:w-[500px] lg:hover:w-[600px]" src="{% if product.image2 %}{{ product.image2.url }}{% else %}
+            {%  static 'img/no_image.png' %}{% endif %}" aria-details="True">
+          </div>
+          <div class="w-full h-32 flex justify-center items-center" dir="ltr">
+            <img id="thumbimage1" onclick="imageopener(1)" class="w-16 h-16 blur-[1px]" src="{% if product.image %}{{ product.image.url }}{% endif %}" aria-details="True">
+
+            <img id="thumbimage2" onclick="imageopener(2)" class=" w-16 h-16 ml-10 blur-[1px]" src="{% if product.image2 %}{{ product.image2.url }}{% endif %}" aria-details="True">
+          </div>
+        </div>
+
 
       </div>
     <div class="w-full px-5 lg:p-0 lg:w-1/2">
@@ -91,7 +104,6 @@
         </div>
           {% csrf_token %}
           <button class="button flex justify-center w-80 bg-green-200  shadow-inner shadow-green-400 m-2  text-black lg:my-4" type="submit" > افزودن به سبد <img class="size-6" src="{% static 'img/cart.png' %}" alt=""></button>
-
         </form>
         {% if product.deliveryTime %}
             <p class="text-purple-700"> {{product.deliveryTime}}</p>
@@ -111,19 +123,15 @@
           </div>
         </form> --> {% endcomment %}
         </div>
-
         </div>
-
         {% endif %}
       </div>
-
     <div class="mt-4">
       <button id="desbtn1" onclick="win('description')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[14px]"> معرفی </button>
       <button id="desbtn2"  onclick="win('Specifications')" class="w-32 border-0 bg-gray-100 text-gray-600 text-[18px]"> مشخصات </button>
       <hr>
       <div id="description" class="text-justify w-full p-4 hidden">
         {{ product.description|safe }}
-
       </div>
       <div id="Specifications" class="text-justify w-full p-4 ">
         <ul>
@@ -146,13 +154,7 @@
         {{ product.Specifications|safe }}
       </div>
     </div>
-
-    
-
-
     </div>
-
-
   </div>
 {% endblock %}
 
@@ -175,6 +177,26 @@
       Specifications.style.display = "block";
       desbtn1.style.fontSize = "14px";
       desbtn2.style.fontSize = "18px";
+    }
+  }
+  let image1 = document.getElementById('image1');
+  let image2 = document.getElementById('image2');
+
+  function imageopener(param) {
+    switch (param) {
+      case 1:
+        image1.style.display = 'block';
+        image2.style.display = 'none';
+
+        break;
+      case 2:
+        image1.style.display = 'none';
+        image2.style.display = 'block';
+
+        break;
+    
+      default:
+        break;
     }
   }
 </script>
